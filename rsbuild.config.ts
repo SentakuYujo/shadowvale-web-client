@@ -25,6 +25,7 @@ const disableServiceWorker = process.env.DISABLE_SERVICE_WORKER === 'true'
 //@ts-ignore
 try { require('./localSettings.js') } catch (e) { }
 
+// Read the base config
 const configJson = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 try {
     const localConfig = process.env.LOCAL_CONFIG_FILE || './config.local.json'
@@ -60,7 +61,8 @@ const appConfig = defineConfig({
             'process.env.SINGLE_FILE_BUILD': JSON.stringify(process.env.SINGLE_FILE_BUILD),
             'process.platform': '"browser"',
             'process.env.GITHUB_URL': JSON.stringify(`https://github.com/${process.env.GITHUB_REPOSITORY || 'unknown'}`),
-            'process.env.WS_PORT': JSON.stringify(enableMetrics ? 8081 : false)
+            'process.env.WS_PORT': JSON.stringify(enableMetrics ? 8081 : false),
+            'process.env.INLINED_APP_CONFIG': JSON.stringify(configSource === 'BUNDLED' ? configJson : null),
         }
     },
     plugins: [
@@ -75,21 +77,28 @@ const appConfig = defineConfig({
                     fs.mkdirSync('./generated', { recursive: true })
                     fs.mkdirSync('./dist', { recursive: true })
 
-                    // FIX: Ensure these scripts run to create the missing JSON files
-                    console.log('Generating optimized Minecraft data...')
+                    // Generate necessary assets
                     childProcess.execSync('tsx ./scripts/makeOptimizedMcData.mjs', { stdio: 'inherit' })
-                    
-                    console.log('Generating collision shapes...')
                     childProcess.execSync('tsx ./scripts/optimizeBlockCollisions.ts', { stdio: 'inherit' })
-                    
-                    console.log('Generating shims and aliases...')
                     childProcess.execSync('tsx ./scripts/genShims.ts', { stdio: 'inherit' })
                     genLargeDataAliases(SINGLE_FILE_BUILD || process.env.ALWAYS_COMPRESS_LARGE_DATA === 'true')
                     
                     fs.copyFileSync('./assets/favicon.png', './dist/favicon.png')
+                    
+                    // Copy Splashes
                     if (fs.existsSync('./assets/splashes.json')) {
                         fs.copyFileSync('./assets/splashes.json', './dist/splashes.json')
                     }
+
+                    // --- CRITICAL FIX FOR CONFIG.JSON ---
+                    // This ensures the file exists in the folder Netlify actually serves
+                    if (configSource === 'REMOTE') {
+                        console.log('Writing config.json to dist...')
+                        fs.writeFileSync('./dist/config.json', JSON.stringify(configJson, null, 2), 'utf8')
+                    }
+                    // ------------------------------------
+
+                    if (!dev) await execAsync('pnpm run build-mesher')
                 }
                 build.onBeforeBuild(prep)
                 build.onBeforeStartDevServer(prep)
