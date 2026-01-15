@@ -25,7 +25,6 @@ const disableServiceWorker = process.env.DISABLE_SERVICE_WORKER === 'true'
 //@ts-ignore
 try { require('./localSettings.js') } catch (e) { }
 
-// Read the base config
 const configJson = JSON.parse(fs.readFileSync('./config.json', 'utf8'))
 try {
     const localConfig = process.env.LOCAL_CONFIG_FILE || './config.local.json'
@@ -77,26 +76,28 @@ const appConfig = defineConfig({
                     fs.mkdirSync('./generated', { recursive: true })
                     fs.mkdirSync('./dist', { recursive: true })
 
-                    // Generate necessary assets
+                    // Core data generation
                     childProcess.execSync('tsx ./scripts/makeOptimizedMcData.mjs', { stdio: 'inherit' })
                     childProcess.execSync('tsx ./scripts/optimizeBlockCollisions.ts', { stdio: 'inherit' })
                     childProcess.execSync('tsx ./scripts/genShims.ts', { stdio: 'inherit' })
                     genLargeDataAliases(SINGLE_FILE_BUILD || process.env.ALWAYS_COMPRESS_LARGE_DATA === 'true')
                     
+                    // --- ASSET COPYING ---
                     fs.copyFileSync('./assets/favicon.png', './dist/favicon.png')
                     
-                    // Copy Splashes
+                    // Copy Backgrounds Folder (This is what was missing)
+                    if (fs.existsSync('./assets/background')) {
+                        console.log('Copying new background images...')
+                        fsExtra.copySync('./assets/background', './dist/background')
+                    }
+
                     if (fs.existsSync('./assets/splashes.json')) {
                         fs.copyFileSync('./assets/splashes.json', './dist/splashes.json')
                     }
 
-                    // --- CRITICAL FIX FOR CONFIG.JSON ---
-                    // This ensures the file exists in the folder Netlify actually serves
                     if (configSource === 'REMOTE') {
-                        console.log('Writing config.json to dist...')
                         fs.writeFileSync('./dist/config.json', JSON.stringify(configJson, null, 2), 'utf8')
                     }
-                    // ------------------------------------
 
                     if (!dev) await execAsync('pnpm run build-mesher')
                 }
