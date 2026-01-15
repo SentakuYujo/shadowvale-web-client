@@ -1,52 +1,50 @@
 {
   "version": 1,
-  "defaultHost": "<from-proxy>",
+
+  "defaultHost": "play.shadowvalesurvival.com",
   "defaultProxy": "https://proxy.mcraft.fun",
-  "mapsProvider": "https://maps.mcraft.fun/",
+
+  "allowAutoConnect": true,
+  "onlineMode": true,
+
+  "auth": {
+    "type": "microsoft"
+  },
+
+  "mapsProvider": "https://maps.shadowvalesurvival.com/",
   "skinTexturesProxy": "",
+
   "peerJsServer": "",
   "peerJsServerFallback": "https://p2p.mcraft.fun",
-  "promoteServers": [
-    {
-      "ip": "wss://play.shadowvale.com"
-    },
-    {
-      "ip": "wss://play.mcraft.fun"
-    },
-    {
-      "ip": "wss://play.webmc.fun",
-      "name": "WebMC"
-    },
-    {
-      "ip": "wss://ws.fuchsmc.net"
-    },
-    {
-      "ip": "wss://play2.mcraft.fun"
-    },
-    {
-      "ip": "wss://play-creative.mcraft.fun",
-      "description": "Might be available soon, stay tuned!"
-    },
-    {
-      "ip": "kaboom.pw",
-      "version": "1.20.3",
-      "description": "Very nice a polite server. Must try for everyone!"
-    }
-  ],
-  "rightSideText": "A Minecraft client in the browser!",
-  "splashText": "The sunset is coming!",
-  "splashTextFallback": "Welcome!",
+
+  "promoteServers": [],
+
+  "rightSideText": "Not affiliated with Mojang or Minecraft.",
+  "splashText": "/splashes.json",
+  "splashTextFallback": "Welcome to Shadowvale!",
+
   "pauseLinks": [
     [
       {
-        "type": "store"
+        "type": "github",
+        "text": "Store",
+        "url": "https://store.shadowvalesurvival.com"
       },
       {
-        "type": "discord"
+        "type": "discord",
+        "text": "Discord",
+        "url": "https://discord.shadowvalesurvival.com"
       }
     ]
   ],
-  "defaultUsername": "mcrafter{0-9999}",
+
+  "defaultUsername": "",
+
+  "alwaysReconnectButton": false,
+  "reportBugButtonWithReconnect": false,
+
+  "resourcePackUrl": "/resourcepack.zip",
+
   "mobileButtons": [
     {
       "action": "general.drop",
@@ -55,7 +53,6 @@
     },
     {
       "action": "general.selectItem",
-      "actionHold": "",
       "label": "S"
     },
     {
@@ -65,18 +62,15 @@
     },
     {
       "action": "general.playersList",
-      "actionHold": "",
       "icon": "pixelarticons:users",
       "label": "TAB"
     },
     {
       "action": "general.chat",
-      "actionHold": "",
       "label": ""
     },
     {
       "action": "ui.pauseMenu",
-      "actionHold": "",
       "label": ""
     }
   ]

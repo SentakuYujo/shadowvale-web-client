@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { openURL } from 'renderer/viewer/lib/simpleUtils'
 import { useSnapshot } from 'valtio'
-import { ConnectOptions } from '../connect'
 import { miscUiState } from '../globalState'
 import {
   isRemoteSplashText,
@@ -9,48 +7,44 @@ import {
   getCachedSplashText,
   cacheSplashText,
   cacheSourceUrl,
-  clearSplashCache
+  clearSplashCache,
 } from '../utils/splashText'
 import styles from './mainMenu.module.css'
 import Button from './Button'
-import ButtonWithTooltip from './ButtonWithTooltip'
 import useLongPress from './useLongPress'
 import PauseLinkButtons from './PauseLinkButtons'
-
-/** 🔗 Shadowvale server (edit if needed) */
-const SHADOWVALE_SERVER = 'play.shadowvalesurvival.com:25565'
 
 type Action = (e: React.MouseEvent<HTMLButtonElement>) => void
 
 interface Props {
-  connectToServerAction?: Action
   optionsAction?: Action
-  mapsProvider?: string
   versionStatus?: string
   versionTitle?: string
   onVersionStatusClick?: () => void
-  bottomRightLinks?: string
   versionText?: string
 }
 
-export default ({
-  connectToServerAction,
+export default function MainMenu({
   optionsAction,
   versionText,
-  onVersionTextClick,
   versionStatus,
   versionTitle,
   onVersionStatusClick,
-  bottomRightLinks,
-}: Props) => {
+}: Props) {
   const { appConfig } = useSnapshot(miscUiState)
+
+  /* ================= SPLASH TEXT ================= */
 
   const splashText = useMemo(() => {
     const cachedText = getCachedSplashText()
-
     const configSplashFromApp = appConfig?.splashText
-    const isRemote = configSplashFromApp && isRemoteSplashText(configSplashFromApp)
-    const sourceKey = isRemote ? configSplashFromApp : (configSplashFromApp || '')
+    const isRemote =
+      !!configSplashFromApp && isRemoteSplashText(configSplashFromApp)
+
+    const sourceKey = isRemote
+      ? configSplashFromApp
+      : configSplashFromApp || ''
+
     const storedSourceKey = localStorage.getItem('minecraft_splash_url')
 
     if (storedSourceKey !== sourceKey) {
@@ -60,81 +54,51 @@ export default ({
       return cachedText
     }
 
-    if (!isRemote && configSplashFromApp && configSplashFromApp.trim() !== '') {
+    if (!isRemote && configSplashFromApp?.trim()) {
       cacheSplashText(configSplashFromApp)
       return configSplashFromApp
     }
 
     return appConfig?.splashTextFallback || ''
-  }, [])
+  }, [appConfig])
 
   useEffect(() => {
-    const configSplashFromApp = appConfig?.splashText
-    if (configSplashFromApp && isRemoteSplashText(configSplashFromApp)) {
-      loadRemoteSplashText(configSplashFromApp)
-        .then(fetchedText => {
-          if (fetchedText && fetchedText.trim() !== '' && !fetchedText.includes('Failed to load')) {
-            cacheSplashText(fetchedText)
-          }
-        })
-        .catch(error => {
-          console.error('Failed to preload splash text for next session:', error)
-        })
+    const splash = appConfig?.splashText
+    if (splash && isRemoteSplashText(splash)) {
+      loadRemoteSplashText(splash)
+        .then(text => text && cacheSplashText(text))
+        .catch(console.error)
     }
   }, [appConfig?.splashText])
 
-  if (!bottomRightLinks?.trim()) bottomRightLinks = undefined
-  const linksParsed = bottomRightLinks?.split(/;|\n/g).map(l => {
-    const parts = l.split(':')
-    return [parts[0], parts.slice(1).join(':')]
-  }) as Array<[string, string]> | undefined
+  /* ================= VERSION LONG PRESS ================= */
 
-  const versionLongPress = useLongPress(
-    () => {
-      const buildDate = process.env.BUILD_VERSION
-        ? new Date(process.env.BUILD_VERSION + ':00:00.000Z')
-        : null
-      const hoursAgo = buildDate
-        ? Math.round((Date.now() - buildDate.getTime()) / (1000 * 60 * 60))
-        : null
-      alert(
-        `BUILD DATE:\n${buildDate?.toLocaleString() || 'Development build'}${
-          hoursAgo ? `\nBuilt ${hoursAgo} hours ago` : ''
-        }`
-      )
-    },
-    () => onVersionTextClick?.(),
-  )
+  const versionLongPress = useLongPress(() => {
+    const buildDate = process.env.BUILD_VERSION
+      ? new Date(process.env.BUILD_VERSION + ':00:00.000Z')
+      : null
 
-  /** Dev-only long press (unchanged) */
-  const connectToServerLongPress = useLongPress(
-    () => {
-      if (process.env.NODE_ENV === 'development') {
-        const origin = window.location.hostname
-        const connectOptions: ConnectOptions = {
-          server: `${origin}:25565`,
-          username: 'test',
-        }
-        dispatchEvent(new CustomEvent('connect', { detail: connectOptions }))
-      }
-    },
-    () => connectToServerAction?.(null as any),
-    { delay: 500 }
-  )
+    alert(
+      `BUILD DATE:\n${buildDate?.toLocaleString() || 'Development build'}`
+    )
+  })
 
-  /** ✅ MAIN PLAY CLICK → SHADOWVALE */
-  const connectToShadowvale = () => {
-    const connectOptions: ConnectOptions = {
-      server: SHADOWVALE_SERVER,
-      username: localStorage.getItem('mc_username') ?? 'Player',
-    }
+  /* ================= PLAY ================= */
 
-    dispatchEvent(
+  const onPlayClick = () => {
+    window.dispatchEvent(
       new CustomEvent('connect', {
-        detail: connectOptions,
+        detail: {
+          server: 'play.shadowvalesurvival.com:25565',
+          authenticatedAccount: true,
+          proxy: 'https://proxy.mcraft.fun',
+          botVersion: '1.21.8',
+        },
       })
     )
   }
+
+  /* ================= RENDER ================= */
 
   return (
     <div className={styles.root}>
@@ -146,18 +110,13 @@ export default ({
       </div>
 
       <div className={styles.menu}>
-<ButtonWithTooltip
-  onClick={connectToShadowvale}
-  data-test-id='servers-screen-button'
->
-  Play
-</ButtonWithTooltip>
+        {/* PLAY */}
+        <Button onClick={onPlayClick}>Play</Button>
 
+        {/* OPTIONS */}
+        <Button onClick={optionsAction}>Options</Button>
 
-        <Button onClick={optionsAction}>
-          Options
-        </Button>
-
+        {/* STORE / DISCORD */}
         <div className={styles['menu-row']}>
           <PauseLinkButtons />
         </div>
@@ -168,32 +127,18 @@ export default ({
           <span style={{ fontSize: 10, color: 'gray' }} {...versionLongPress}>
             {versionText}
           </span>
+
           <span
-            title={`${versionTitle}`}
+            title={versionTitle}
+            onClick={onVersionStatusClick}
             className={styles['product-info']}
           >
-            Shadowvale Web Client {versionStatus}
+            Minecraft 1.21.8 {versionStatus}
           </span>
         </div>
 
         <span className={styles['product-description']}>
-          <div className={styles['product-link']}>
-            {linksParsed?.map(([name, link], i, arr) => {
-              if (!link.startsWith('http')) link = `https://${link}`
-              return (
-                <div
-                  key={name}
-                  style={{ color: 'lightgray', fontSize: 8 }}
-                >
-                  <a style={{ whiteSpace: 'nowrap' }} href={link}>
-                    {name}
-                  </a>
-                  {i < arr.length - 1 && <span style={{ marginLeft: 2 }}>·</span>}
-                </div>
-              )
-            })}
-          </div>
-          <span>{appConfig?.rightSideText}</span>
+          {appConfig?.rightSideText}
         </span>
       </div>
     </div>
