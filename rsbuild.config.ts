@@ -178,6 +178,8 @@ const appConfig = defineConfig({
                         childProcess.execSync('tsx ./scripts/optimizeBlockCollisions.ts', { stdio: 'inherit' })
                     }
                     genLargeDataAliases(SINGLE_FILE_BUILD || process.env.ALWAYS_COMPRESS_LARGE_DATA === 'true')
+                    
+                    // Asset copies
                     fsExtra.copySync('./node_modules/mc-assets/dist/other-textures/latest/entity', './dist/textures/entity')
                     fsExtra.copySync('./assets/background', './dist/background')
                     fs.copyFileSync('./assets/favicon.png', './dist/favicon.png')
@@ -187,10 +189,21 @@ const appConfig = defineConfig({
                     fs.copyFileSync('./assets/debug-inputs.html', './dist/debug-inputs.html')
                     fs.copyFileSync('./assets/loading-bg.jpg', './dist/loading-bg.jpg')
                     
-                    // Shadowvale Custom: Copy splashes.json from assets to dist
-                    if (fs.existsSync('./assets/splashes.json')) {
-                        fs.copyFileSync('./assets/splashes.json', './dist/splashes.json')
+                    // --- SHADOWVALE CUSTOM SPLASHES START ---
+                    try {
+                        if (fs.existsSync('./assets/splashes.json')) {
+                            fs.copyFileSync('./assets/splashes.json', './dist/splashes.json')
+                            console.log('✅ Success: splashes.json copied to dist')
+                        } else if (fs.existsSync('./public/splashes.json')) {
+                            fs.copyFileSync('./public/splashes.json', './dist/splashes.json')
+                            console.log('✅ Success: splashes.json (from public) copied to dist')
+                        } else {
+                            console.log('⚠️ Warning: splashes.json not found in assets or public')
+                        }
+                    } catch (e) {
+                        console.log('❌ Error: Could not copy splashes.json', e)
                     }
+                    // --- SHADOWVALE CUSTOM SPLASHES END ---
 
                     if (fs.existsSync('./assets/release.json')) {
                         fs.copyFileSync('./assets/release.json', './dist/release.json')
@@ -242,7 +255,6 @@ const appConfig = defineConfig({
                             html = html.replace('src="./loading-bg.jpg"', `src="data:image/png;base64,${fs.readFileSync('./assets/loading-bg.jpg', 'base64')}"`)
                             html += '<script id="mesher-worker-code">' + fs.readFileSync('./dist/mesher.js', 'utf8') + '</script>'
                             fs.writeFileSync(singleBuildHtml, html, 'utf8')
-                            console.log('single file size', (fs.statSync(singleBuildHtml).size / 1024 / 1024).toFixed(2), 'mb')
                         } else {
                             if (!disableServiceWorker) {
                                 await generateSW({
