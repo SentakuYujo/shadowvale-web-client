@@ -44,7 +44,7 @@ if (fs.existsSync('./assets/release.json')) {
     const releaseJson = JSON.parse(fs.readFileSync('./assets/release.json', 'utf8'))
     releaseTag = releaseJson.latestTag
     releaseLink = releaseJson.isCommit ? `/commit/${releaseJson.latestTag}` : `/releases/${releaseJson.latestTag}`
-    releaseChangelog = releaseJson.changelog?.replace(/<!-- bump-type:[\w]+ -->/, '')
+    releaseChangelog = releaseJson.changelog?.replace(//, '')
     githubRepositoryFallback = releaseJson.repository
 }
 
@@ -78,9 +78,6 @@ const appConfig = defineConfig({
                     },
                 }
             ],
-            // <link rel="favicon" href="favicon.png">
-            // <link rel="icon" type="image/png" href="favicon.png" />
-            // <meta property="og:image" content="favicon.png" />
             {
                 tag: 'link',
                 attrs: {
@@ -116,7 +113,6 @@ const appConfig = defineConfig({
             css: true,
         },
         minify: {
-            // js: false,
             jsOptions: {
                 minimizerOptions: {
                     mangle: {
@@ -136,23 +132,12 @@ const appConfig = defineConfig({
         } : undefined,
         inlineScripts: SINGLE_FILE_BUILD,
         inlineStyles: SINGLE_FILE_BUILD,
-        // 50kb limit for data uri
         dataUriLimit: SINGLE_FILE_BUILD ? 1 * 1024 * 1024 * 1024 : 50 * 1024
-    },
-    performance: {
-        // prefetch: {
-        //     include(filename) {
-        //         return filename.includes('mc-data') || filename.includes('mc-assets')
-        //     },
-        // },
     },
     source: {
         entry: {
             index: './src/index.ts',
         },
-        // exclude: [
-        //     /.woff$/
-        // ],
         define: {
             'process.env.BUILD_VERSION': JSON.stringify(!dev ? buildingVersion : 'undefined'),
             'process.env.MAIN_MENU_LINKS': JSON.stringify(process.env.MAIN_MENU_LINKS),
@@ -173,10 +158,6 @@ const appConfig = defineConfig({
         },
     },
     server: {
-        // strictPort: true,
-        // publicDir: {
-        //     name: 'assets',
-        // },
         proxy: {
             '/api': 'http://localhost:8080',
         },
@@ -196,7 +177,6 @@ const appConfig = defineConfig({
                     if (!fs.existsSync('./generated/latestBlockCollisionsShapes.json') || require('./generated/latestBlockCollisionsShapes.json').versionKey !== require('minecraft-data/package.json').version) {
                         childProcess.execSync('tsx ./scripts/optimizeBlockCollisions.ts', { stdio: 'inherit' })
                     }
-                    // childProcess.execSync(['tsx', './scripts/genLargeDataAliases.ts', ...(SINGLE_FILE_BUILD ? ['--compressed'] : [])].join(' '), { stdio: 'inherit' })
                     genLargeDataAliases(SINGLE_FILE_BUILD || process.env.ALWAYS_COMPRESS_LARGE_DATA === 'true')
                     fsExtra.copySync('./node_modules/mc-assets/dist/other-textures/latest/entity', './dist/textures/entity')
                     fsExtra.copySync('./assets/background', './dist/background')
@@ -206,6 +186,12 @@ const appConfig = defineConfig({
                     fs.copyFileSync('./assets/config.html', './dist/config.html')
                     fs.copyFileSync('./assets/debug-inputs.html', './dist/debug-inputs.html')
                     fs.copyFileSync('./assets/loading-bg.jpg', './dist/loading-bg.jpg')
+                    
+                    // Shadowvale Custom: Copy splashes.json from assets to dist
+                    if (fs.existsSync('./assets/splashes.json')) {
+                        fs.copyFileSync('./assets/splashes.json', './dist/splashes.json')
+                    }
+
                     if (fs.existsSync('./assets/release.json')) {
                         fs.copyFileSync('./assets/release.json', './dist/release.json')
                     }
@@ -216,11 +202,7 @@ const appConfig = defineConfig({
                     if (fs.existsSync('./generated/sounds.js')) {
                         fs.copyFileSync('./generated/sounds.js', './dist/sounds.js')
                     }
-                    // childProcess.execSync('./scripts/prepareSounds.mjs', { stdio: 'inherit' })
-                    // childProcess.execSync('tsx ./scripts/genMcDataTypes.ts', { stdio: 'inherit' })
-                    // childProcess.execSync('tsx ./scripts/genPixelartTypes.ts', { stdio: 'inherit' })
                     if (fs.existsSync('./renderer/dist/mesher.js') && dev) {
-                        // copy mesher
                         fs.copyFileSync('./renderer/dist/mesher.js', './dist/mesher.js')
                         fs.copyFileSync('./renderer/dist/mesher.js.map', './dist/mesher.js.map')
                     } else if (!dev) {
@@ -228,7 +210,6 @@ const appConfig = defineConfig({
                     }
                     fs.writeFileSync('./dist/version.txt', buildingVersion, 'utf-8')
 
-                    // Start WebSocket server in development
                     if (dev && enableMetrics) {
                         await startWsServer(8081, false)
                     }
@@ -245,30 +226,26 @@ const appConfig = defineConfig({
                         }
 
                         if (SINGLE_FILE_BUILD) {
-                            // check that only index.html is in the dist/single folder
                             const singleBuildFiles = fs.readdirSync('./dist/single')
                             if (singleBuildFiles.length !== 1 || singleBuildFiles[0] !== 'index.html') {
-                                throw new Error('Single file build must only have index.html in the dist/single folder. Ensure workers are imported & built correctly.')
+                                throw new Error('Single file build must only have index.html in the dist/single folder.')
                             }
 
-                            // process index.html
                             const singleBuildHtml = './dist/single/index.html'
                             let html = fs.readFileSync(singleBuildHtml, 'utf8')
                             const verToMajor = (ver: string) => ver.split('.').slice(0, 2).join('.')
                             const supportedMajorVersions = [...new Set(supportedVersions.map(a => verToMajor(a)))].join(', ')
-                            html = `<!DOCTYPE html><!-- MINECRAFT WEB CLIENT ${releaseTag ?? ''} -->\n<!-- A true SINGLE FILE BUILD with built-in server -->\n<!-- All textures, assets and Minecraft data for ${supportedMajorVersions} inlined into one file. -->\n${html}`
+                            html = `<!DOCTYPE html>\n\n\n${html}`
 
                             const resizedImage = (await (sharp('./assets/favicon.png') as any).resize(64).toBuffer()).toString('base64')
                             html = html.replace('favicon.png', `data:image/png;base64,${resizedImage}`)
                             html = html.replace('src="./loading-bg.jpg"', `src="data:image/png;base64,${fs.readFileSync('./assets/loading-bg.jpg', 'base64')}"`)
                             html += '<script id="mesher-worker-code">' + fs.readFileSync('./dist/mesher.js', 'utf8') + '</script>'
                             fs.writeFileSync(singleBuildHtml, html, 'utf8')
-                            // write output file size
                             console.log('single file size', (fs.statSync(singleBuildHtml).size / 1024 / 1024).toFixed(2), 'mb')
                         } else {
                             if (!disableServiceWorker) {
-                            const { count, size, warnings } = await generateSW({
-                                    // dontCacheBustURLsMatching: [new RegExp('...')],
+                                await generateSW({
                                     globDirectory: 'dist',
                                     skipWaiting: true,
                                     clientsClaim: true,
@@ -284,12 +261,6 @@ const appConfig = defineConfig({
             },
         },
     ],
-    // performance: {
-    //     bundleAnalyze: {
-    //         analyzerMode: 'json',
-    //         reportFilename: 'report.json',
-    //     },
-    // },
 })
 
 export default mergeRsbuildConfig(
