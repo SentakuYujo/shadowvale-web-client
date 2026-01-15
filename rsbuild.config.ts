@@ -36,10 +36,7 @@ const configSource = (SINGLE_FILE_BUILD ? 'BUNDLED' : (process.env.CONFIG_JSON_S
 const faviconPath = 'favicon.png'
 const enableMetrics = process.env.ENABLE_METRICS === 'true'
 
-// Build tags array safely to avoid ParseErrors
-const htmlTags: any[] = [
-    { tag: 'link', attrs: { rel: 'favicon', href: faviconPath } }
-]
+const htmlTags: any[] = [{ tag: 'link', attrs: { rel: 'favicon', href: faviconPath } }]
 if (!SINGLE_FILE_BUILD) {
     htmlTags.push({ tag: 'link', attrs: { rel: 'manifest', crossorigin: 'anonymous', href: 'manifest.json' } })
     htmlTags.push({ tag: 'link', attrs: { rel: 'icon', type: 'image/png', href: faviconPath } })
@@ -47,22 +44,10 @@ if (!SINGLE_FILE_BUILD) {
 }
 
 const appConfig = defineConfig({
-    html: {
-        template: './index.html',
-        inject: 'body',
-        tags: htmlTags
-    },
+    html: { template: './index.html', inject: 'body', tags: htmlTags },
     output: {
         externals: ['sharp'],
         sourceMap: { js: 'source-map', css: true },
-        minify: {
-            jsOptions: {
-                minimizerOptions: {
-                    mangle: { safari10: true, keep_classnames: true, keep_fnames: true, keep_private_props: true },
-                    compress: { unused: true }
-                }
-            }
-        },
         distPath: SINGLE_FILE_BUILD ? { html: './single' } : undefined,
         inlineScripts: SINGLE_FILE_BUILD,
         inlineStyles: SINGLE_FILE_BUILD,
@@ -72,19 +57,12 @@ const appConfig = defineConfig({
         entry: { index: './src/index.ts' },
         define: {
             'process.env.BUILD_VERSION': JSON.stringify(!dev ? buildingVersion : 'undefined'),
-            'process.env.MAIN_MENU_LINKS': JSON.stringify(process.env.MAIN_MENU_LINKS),
             'process.env.SINGLE_FILE_BUILD': JSON.stringify(process.env.SINGLE_FILE_BUILD),
-            'process.env.SINGLE_FILE_BUILD_MODE': JSON.stringify(process.env.SINGLE_FILE_BUILD),
             'process.platform': '"browser"',
             'process.env.GITHUB_URL': JSON.stringify(`https://github.com/${process.env.GITHUB_REPOSITORY || 'unknown'}`),
-            'process.env.ALWAYS_MINIMAL_SERVER_UI': JSON.stringify(process.env.ALWAYS_MINIMAL_SERVER_UI),
-            'process.env.RELEASE_TAG': JSON.stringify('latest'),
-            'process.env.DISABLE_SERVICE_WORKER': JSON.stringify(disableServiceWorker),
-            'process.env.INLINED_APP_CONFIG': JSON.stringify(configSource === 'BUNDLED' ? configJson : null),
             'process.env.WS_PORT': JSON.stringify(enableMetrics ? 8081 : false)
         }
     },
-    server: { proxy: { '/api': 'http://localhost:8080' } },
     plugins: [
         pluginReact(),
         pluginNodePolyfill(),
@@ -93,19 +71,25 @@ const appConfig = defineConfig({
             name: 'internal-build-plugin',
             setup(build: RsbuildPluginAPI) {
                 const prep = async () => {
+                    console.log('Starting pre-build generation...')
                     fs.mkdirSync('./generated', { recursive: true })
+                    fs.mkdirSync('./dist', { recursive: true })
+
+                    // FIX: Ensure these scripts run to create the missing JSON files
+                    console.log('Generating optimized Minecraft data...')
+                    childProcess.execSync('tsx ./scripts/makeOptimizedMcData.mjs', { stdio: 'inherit' })
+                    
+                    console.log('Generating collision shapes...')
+                    childProcess.execSync('tsx ./scripts/optimizeBlockCollisions.ts', { stdio: 'inherit' })
+                    
+                    console.log('Generating shims and aliases...')
                     childProcess.execSync('tsx ./scripts/genShims.ts', { stdio: 'inherit' })
                     genLargeDataAliases(SINGLE_FILE_BUILD || process.env.ALWAYS_COMPRESS_LARGE_DATA === 'true')
                     
-                    fs.mkdirSync('./dist', { recursive: true })
                     fs.copyFileSync('./assets/favicon.png', './dist/favicon.png')
-                    
-                    // Ensure splashes are included
                     if (fs.existsSync('./assets/splashes.json')) {
                         fs.copyFileSync('./assets/splashes.json', './dist/splashes.json')
                     }
-
-                    if (!dev) await execAsync('pnpm run build-mesher')
                 }
                 build.onBeforeBuild(prep)
                 build.onBeforeStartDevServer(prep)
