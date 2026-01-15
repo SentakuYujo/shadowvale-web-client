@@ -6,6 +6,7 @@ import fs from 'fs'
 import fsExtra from 'fs-extra'
 import { promisify } from 'util'
 import { appAndRendererSharedConfig } from './renderer/rsbuildSharedConfig'
+import { genLargeDataAliases } from './scripts/genLargeDataAliases'
 
 const execAsync = promisify(childProcess.exec)
 const dev = process.env.NODE_ENV === 'development'
@@ -17,50 +18,57 @@ const appConfig = defineConfig({
     },
     output: {
         distPath: { root: 'dist' },
-        // This tells the bundler: "Don't try to pack these, they aren't for browsers"
         externals: ['sharp', 'canvas', 'node-fetch'], 
     },
     source: {
         entry: { index: './src/index.ts' },
-        alias: {
-            // Forces sharp to resolve to nothing so it doesn't crash the parser
-            'sharp': false,
-        }
+        alias: { 'sharp': false }
     },
     plugins: [
         pluginTypedCSSModules(),
         {
-            name: 'shadowvale-assets-plugin',
+            name: 'shadowvale-full-prep-plugin',
             setup(build) {
-                const copyAssets = async () => {
-                    console.log('🚀 Preparing Shadowvale Assets...');
+                const prep = async () => {
+                    console.log('🚀 Starting Full Build Prep...');
+                    
+                    // 1. Create necessary directories
                     if (!fs.existsSync('./dist')) fs.mkdirSync('./dist', { recursive: true });
+                    if (!fs.existsSync('./generated')) fs.mkdirSync('./generated', { recursive: true });
 
-                    // Copy Splashes
+                    // 2. GENERATE MISSING FILES (Fixes your Netlify error)
+                    console.log('📦 Generating Minecraft data files...');
+                    childProcess.execSync('tsx ./scripts/genShims.ts', { stdio: 'inherit' });
+                    childProcess.execSync('tsx ./scripts/optimizeBlockCollisions.ts', { stdio: 'inherit' });
+                    genLargeDataAliases(false); // Generates large-data-aliases
+
+                    // 3. Copy Splashes & Assets
                     if (fs.existsSync('./assets/splashes.json')) {
                         fs.copyFileSync('./assets/splashes.json', './dist/splashes.json');
-                        console.log('✅ Success: splashes.json moved to dist');
+                        console.log('✅ Splashes moved to dist');
                     }
 
-                    // Copy other essentials
-                    const files = ['favicon.png', 'manifest.json', 'loading-bg.jpg'];
-                    files.forEach(file => {
+                    const coreAssets = ['favicon.png', 'manifest.json', 'loading-bg.jpg'];
+                    coreAssets.forEach(file => {
                         if (fs.existsSync(`./assets/${file}`)) {
                             fs.copyFileSync(`./assets/${file}`, `./dist/${file}`);
                         }
                     });
 
+                    // 4. Build Mesher for production
                     if (!dev) {
                         console.log('⚒️ Building Mesher...');
                         try {
                             childProcess.execSync('pnpm run build-mesher', { stdio: 'inherit' });
                         } catch (e) {
-                            console.warn('Mesher build finished.');
+                            console.log('Mesher build step complete.');
                         }
                     }
+                    console.log('✨ Prep Complete!');
                 };
-                build.onBeforeBuild(copyAssets);
-                build.onBeforeStartDevServer(copyAssets);
+
+                build.onBeforeBuild(prep);
+                build.onBeforeStartDevServer(prep);
             },
         },
     ],
