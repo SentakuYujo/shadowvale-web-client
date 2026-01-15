@@ -148,10 +148,6 @@ export default ({
 
       <div className={styles.menu}>
 <ButtonWithTooltip
-  initialTooltip={{
-    content: 'Connect to Shadowvale',
-    placement: 'top',
-  }}
   onClick={connectToShadowvale}
   data-test-id='servers-screen-button'
 >
@@ -174,8 +170,7 @@ export default ({
             {versionText}
           </span>
           <span
-            title={`${versionTitle} (click to reload)`}
-            onClick={onVersionStatusClick}
+            title={`${versionTitle}`}
             className={styles['product-info']}
           >
             Shadowvale Web Client {versionStatus}
