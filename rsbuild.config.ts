@@ -28,12 +28,13 @@ const appConfig = defineConfig({
         define: {
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.platform': '"browser"',
-            'global': 'window', // This often fixes "node is not defined" errors
+            'global': 'window', // Crucial: redirects global calls to window
+            'node': 'undefined',  // Fixes the specific ReferenceError: node is not defined
         }
     },
     plugins: [
         pluginReact(),
-        pluginNodePolyfill(), // This is the crucial fix for your error
+        pluginNodePolyfill(), // Injects Buffer, process, etc.
         pluginTypedCSSModules(),
         {
             name: 'shadowvale-full-prep-plugin',
@@ -43,15 +44,16 @@ const appConfig = defineConfig({
                     if (!fs.existsSync('./dist')) fs.mkdirSync('./dist', { recursive: true });
                     if (!fs.existsSync('./generated')) fs.mkdirSync('./generated', { recursive: true });
 
-                    console.log('📦 Optimizing Data & Generating Shims...');
+                    console.log('📦 Generating Minecraft Data & Shims...');
                     childProcess.execSync('tsx ./scripts/makeOptimizedMcData.mjs', { stdio: 'inherit' });
                     childProcess.execSync('tsx ./scripts/genShims.ts', { stdio: 'inherit' });
                     childProcess.execSync('tsx ./scripts/optimizeBlockCollisions.ts', { stdio: 'inherit' });
                     genLargeDataAliases(false);
 
-                    // Final Asset Sync
+                    // Asset Sync (Splashes, etc.)
                     if (fs.existsSync('./assets/splashes.json')) {
                         fs.copyFileSync('./assets/splashes.json', './dist/splashes.json');
+                        console.log('✅ splashes.json ready');
                     }
                     
                     const coreAssets = ['favicon.png', 'manifest.json', 'loading-bg.jpg'];
@@ -64,7 +66,7 @@ const appConfig = defineConfig({
                         console.log('⚒️ Building Mesher...');
                         try {
                             childProcess.execSync('pnpm run build-mesher', { stdio: 'inherit' });
-                        } catch (e) { console.log('Mesher step finished.'); }
+                        } catch (e) { console.log('Mesher build finished.'); }
                     }
                 };
                 build.onBeforeBuild(prep);
