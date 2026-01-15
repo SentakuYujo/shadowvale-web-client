@@ -30,19 +30,24 @@ const appConfig = defineConfig({
             name: 'shadowvale-full-prep-plugin',
             setup(build) {
                 const prep = async () => {
-                    console.log('🚀 Starting Full Build Prep...');
+                    console.log('🚀 Starting Shadowvale Deep Prep...');
                     
                     // 1. Create necessary directories
                     if (!fs.existsSync('./dist')) fs.mkdirSync('./dist', { recursive: true });
                     if (!fs.existsSync('./generated')) fs.mkdirSync('./generated', { recursive: true });
 
-                    // 2. GENERATE MISSING FILES (Fixes your Netlify error)
-                    console.log('📦 Generating Minecraft data files...');
+                    // 2. RUN DATA OPTIMIZATION (Fixes the current error)
+                    console.log('📦 Optimizing Minecraft Data...');
+                    childProcess.execSync('tsx ./scripts/makeOptimizedMcData.mjs', { stdio: 'inherit' });
+                    
+                    console.log('📦 Generating Shims & Collisions...');
                     childProcess.execSync('tsx ./scripts/genShims.ts', { stdio: 'inherit' });
                     childProcess.execSync('tsx ./scripts/optimizeBlockCollisions.ts', { stdio: 'inherit' });
-                    genLargeDataAliases(false); // Generates large-data-aliases
+                    
+                    console.log('📦 Generating Large Data Aliases...');
+                    genLargeDataAliases(false);
 
-                    // 3. Copy Splashes & Assets
+                    // 3. Copy Splashes & Essential Assets
                     if (fs.existsSync('./assets/splashes.json')) {
                         fs.copyFileSync('./assets/splashes.json', './dist/splashes.json');
                         console.log('✅ Splashes moved to dist');
@@ -50,21 +55,22 @@ const appConfig = defineConfig({
 
                     const coreAssets = ['favicon.png', 'manifest.json', 'loading-bg.jpg'];
                     coreAssets.forEach(file => {
-                        if (fs.existsSync(`./assets/${file}`)) {
-                            fs.copyFileSync(`./assets/${file}`, `./dist/${file}`);
+                        const src = `./assets/${file}`;
+                        if (fs.existsSync(src)) {
+                            fs.copyFileSync(src, `./dist/${file}`);
                         }
                     });
 
-                    // 4. Build Mesher for production
+                    // 4. Production Mesher Build
                     if (!dev) {
                         console.log('⚒️ Building Mesher...');
                         try {
                             childProcess.execSync('pnpm run build-mesher', { stdio: 'inherit' });
                         } catch (e) {
-                            console.log('Mesher build step complete.');
+                            console.log('Mesher step finished.');
                         }
                     }
-                    console.log('✨ Prep Complete!');
+                    console.log('✨ Prep Complete! Starting Rspack...');
                 };
 
                 build.onBeforeBuild(prep);
