@@ -31,7 +31,6 @@ interface Props {
   onVersionStatusClick?: () => void
   bottomRightLinks?: string
   versionText?: string
-  onVersionTextClick?: () => void
 }
 
 export default ({
