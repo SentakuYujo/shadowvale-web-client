@@ -96,13 +96,13 @@ const appConfig = defineConfig({
 
                     // --- RESOURCE PACK & CORS CONFIG ---
                     // Ensures the zip and Netlify headers are moved to production
-                    if (fs.existsSync('./assets/generated.zip')) {
+                    if (fs.existsSync('./assets/resourcepack.zip')) {
                         console.log('Copying resource pack (generated.zip)...')
-                        fs.copyFileSync('./assets/generated.zip', './dist/generated.zip')
+                        fs.copyFileSync('./assets/resourcepack.zip', './dist/resourcepack.zip')
                     }
-                    if (fs.existsSync('./assets/_redirects')) {
+                    if (fs.existsSync('./assets/_headers')) {
                         console.log('Copying Netlify _redirects for CORS...')
-                        fs.copyFileSync('./assets/_redirects', './dist/_redirects')
+                        fs.copyFileSync('./assets/_headers', './dist/_headers')
                     }
 
                     if (configSource === 'REMOTE') {

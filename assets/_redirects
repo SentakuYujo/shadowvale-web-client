@@ -1,5 +1,0 @@
-# 1. Force serve the actual zip file
-/generated.zip  /generated.zip  200!
-
-# 2. Catch-all for React (must be below the zip rule)
-/* /index.html  200
