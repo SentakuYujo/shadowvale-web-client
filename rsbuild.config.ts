@@ -51,7 +51,7 @@ const appConfig = defineConfig({
         distPath: SINGLE_FILE_BUILD ? { html: './single' } : undefined,
         inlineScripts: SINGLE_FILE_BUILD,
         inlineStyles: SINGLE_FILE_BUILD,
-        dataUriLimit: SINGLE_FILE_BUILD ? 1073741824 : 51200
+        dataUriLimit: 51200 // Increased limit for zip handling
     },
     source: {
         entry: { index: './src/index.ts' },
@@ -85,7 +85,6 @@ const appConfig = defineConfig({
                     // --- ASSET COPYING ---
                     fs.copyFileSync('./assets/favicon.png', './dist/favicon.png')
                     
-                    // Copy Backgrounds Folder (This is what was missing)
                     if (fs.existsSync('./assets/background')) {
                         console.log('Copying new background images...')
                         fsExtra.copySync('./assets/background', './dist/background')
@@ -93,6 +92,17 @@ const appConfig = defineConfig({
 
                     if (fs.existsSync('./assets/splashes.json')) {
                         fs.copyFileSync('./assets/splashes.json', './dist/splashes.json')
+                    }
+
+                    // --- RESOURCE PACK & CORS CONFIG ---
+                    // Ensures the zip and Netlify headers are moved to production
+                    if (fs.existsSync('./assets/generated.zip')) {
+                        console.log('Copying resource pack (generated.zip)...')
+                        fs.copyFileSync('./assets/generated.zip', './dist/generated.zip')
+                    }
+                    if (fs.existsSync('./assets/_redirects')) {
+                        console.log('Copying Netlify _redirects for CORS...')
+                        fs.copyFileSync('./assets/_redirects', './dist/_redirects')
                     }
 
                     if (configSource === 'REMOTE') {
