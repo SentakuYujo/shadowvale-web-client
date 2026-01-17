@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useSnapshot } from 'valtio'
 import { miscUiState } from '../globalState'
 import {
@@ -24,30 +24,7 @@ interface Props {
   versionText?: string
 }
 
-const MS_CACHE_KEY = 'shadowvale_ms_cached_tokens_v1'
-const MS_PROFILE_KEY = 'shadowvale_ms_profile_v1'
-
-function hasSavedMicrosoftLogin() {
-  try {
-    const raw = localStorage.getItem(MS_CACHE_KEY)
-    if (!raw) return false
-    const obj = JSON.parse(raw)
-    return obj && typeof obj === 'object' && Object.keys(obj).length > 0
-  } catch {
-    return false
-  }
-}
-
-function getSavedProfileName() {
-  try {
-    const raw = localStorage.getItem(MS_PROFILE_KEY)
-    if (!raw) return null
-    const p = JSON.parse(raw)
-    return typeof p?.username === 'string' ? p.username : null
-  } catch {
-    return null
-  }
-}
+const MENU_MUSIC_SRC = '/music/main_menu.mp3' // served from dist/music/main_menu.mp3
 
 export default function MainMenu({
   optionsAction,
@@ -59,25 +36,17 @@ export default function MainMenu({
   const { appConfig } = useSnapshot(miscUiState)
 
   // -----------------------------
-  // Auth UI state
+  // Auth State
   // -----------------------------
-  const [signedIn, setSignedIn] = useState(false)
-  const [profileName, setProfileName] = useState<string | null>(null)
+  const [hasMicrosoftAccount, setHasMicrosoftAccount] = useState(false)
 
   useEffect(() => {
-    const sync = () => {
-      setSignedIn(hasSavedMicrosoftLogin())
-      setProfileName(getSavedProfileName())
-    }
-    sync()
-
-    const onAuthChanged = () => sync()
-    window.addEventListener('auth:changed', onAuthChanged as any)
-    return () => window.removeEventListener('auth:changed', onAuthChanged as any)
+    const stored = localStorage.getItem('microsoft-auth')
+    setHasMicrosoftAccount(!!stored)
   }, [])
 
   // -----------------------------
-  // Splash text
+  // Splash Text
   // -----------------------------
   const splashText = useMemo(() => {
     const cachedText = getCachedSplashText()
@@ -111,7 +80,72 @@ export default function MainMenu({
   }, [appConfig?.splashText])
 
   // -----------------------------
-  // Version long-press
+  // Main Menu Music (ONLY on MainMenu)
+  // -----------------------------
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const startedRef = useRef(false)
+
+  const stopMenuMusic = () => {
+    const a = audioRef.current
+    if (!a) return
+    try {
+      a.pause()
+      a.currentTime = 0
+    } catch {}
+  }
+
+  useEffect(() => {
+    const audio = new Audio(MENU_MUSIC_SRC)
+    audio.loop = true
+    audio.volume = 0.35
+    audio.preload = 'auto'
+    audioRef.current = audio
+
+    const tryPlay = async () => {
+      if (startedRef.current) return
+      try {
+        await audio.play()
+        startedRef.current = true
+      } catch {
+        // autoplay blocked; will start on first user gesture
+      }
+    }
+
+    // attempt autoplay on mount
+    void tryPlay()
+
+    // fallback: start music on first user interaction
+    const onFirstGesture = async () => {
+      await tryPlay()
+      if (startedRef.current) {
+        window.removeEventListener('pointerdown', onFirstGesture, true)
+        window.removeEventListener('keydown', onFirstGesture, true)
+      }
+    }
+
+    window.addEventListener('pointerdown', onFirstGesture, true)
+    window.addEventListener('keydown', onFirstGesture, true)
+
+    // cleanup on leaving main menu (stop + reset so it restarts when you come back)
+    return () => {
+      window.removeEventListener('pointerdown', onFirstGesture, true)
+      window.removeEventListener('keydown', onFirstGesture, true)
+
+      try {
+        audio.pause()
+        audio.currentTime = 0
+        // detach
+        audio.src = ''
+        audio.load()
+      } catch {}
+
+      audioRef.current = null
+      startedRef.current = false
+    }
+  }, [])
+
+  // -----------------------------
+  // Version Long Press
   // -----------------------------
   const versionLongPress = useLongPress(() => {
     const buildDate = process.env.BUILD_VERSION
@@ -124,18 +158,33 @@ export default function MainMenu({
   // Actions
   // -----------------------------
   const onPlayClick = () => {
+    stopMenuMusic() // ensure it does NOT continue after Play
+
     window.dispatchEvent(
       new CustomEvent('connect', {
         detail: {
           server: 'play.shadowvalesurvival.com:25565',
-          authenticatedAccount: true, // will now use saved MS cache
-	  proxy: 'https://proxy.mcraft.fun',
-          botVersion: '1.21.8',
+          authenticatedAccount: true,
         },
       })
     )
   }
 
+  const onOptionsClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    stopMenuMusic() // ensure it does NOT continue in Options
+    optionsAction?.(e)
+  }
+
+  const onMicrosoftLogin = () => {
+    window.dispatchEvent(new CustomEvent('auth:microsoft'))
+  }
+
+  const onSignOut = () => {
+    localStorage.removeItem('microsoft-auth')
+    window.dispatchEvent(new CustomEvent('logout'))
+    setHasMicrosoftAccount(false)
+    location.reload()
+  }
 
   // -----------------------------
   // Render
@@ -152,7 +201,13 @@ export default function MainMenu({
       <div className={styles.menu}>
         <Button onClick={onPlayClick}>Play</Button>
 
-        <Button onClick={optionsAction}>Options</Button>
+        {!hasMicrosoftAccount && (
+          <Button onClick={onMicrosoftLogin}>Sign in with Microsoft</Button>
+        )}
+
+        {hasMicrosoftAccount && <Button onClick={onSignOut}>Sign out</Button>}
+
+        <Button onClick={onOptionsClick}>Options</Button>
 
         <div className={styles['menu-row']}>
           <PauseLinkButtons />
