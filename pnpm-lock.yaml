@@ -78,9 +78,6 @@ importers:
       '@zardoy/utils':
         specifier: ^0.0.11
         version: 0.0.11
-      adm-zip:
-        specifier: ^0.5.12
-        version: 0.5.16
       browserfs:
         specifier: github:zardoy/browserfs#build
         version: https://codeload.github.com/zardoy/browserfs/tar.gz/e60ca69e74888e057a96a468afe1d62347d3f56f
@@ -295,6 +292,9 @@ importers:
       '@xmcl/installer':
         specifier: ^5.1.0
         version: 5.4.0
+      adm-zip:
+        specifier: ^0.5.16
+        version: 0.5.16
       assert:
         specifier: ^2.0.0
         version: 2.1.0

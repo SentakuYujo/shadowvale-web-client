@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSnapshot } from 'valtio'
 import { miscUiState } from '../globalState'
 import {
@@ -24,6 +24,31 @@ interface Props {
   versionText?: string
 }
 
+const MS_CACHE_KEY = 'shadowvale_ms_cached_tokens_v1'
+const MS_PROFILE_KEY = 'shadowvale_ms_profile_v1'
+
+function hasSavedMicrosoftLogin() {
+  try {
+    const raw = localStorage.getItem(MS_CACHE_KEY)
+    if (!raw) return false
+    const obj = JSON.parse(raw)
+    return obj && typeof obj === 'object' && Object.keys(obj).length > 0
+  } catch {
+    return false
+  }
+}
+
+function getSavedProfileName() {
+  try {
+    const raw = localStorage.getItem(MS_PROFILE_KEY)
+    if (!raw) return null
+    const p = JSON.parse(raw)
+    return typeof p?.username === 'string' ? p.username : null
+  } catch {
+    return null
+  }
+}
+
 export default function MainMenu({
   optionsAction,
   versionText,
@@ -33,18 +58,32 @@ export default function MainMenu({
 }: Props) {
   const { appConfig } = useSnapshot(miscUiState)
 
-  /* ================= SPLASH TEXT ================= */
+  // -----------------------------
+  // Auth UI state
+  // -----------------------------
+  const [signedIn, setSignedIn] = useState(false)
+  const [profileName, setProfileName] = useState<string | null>(null)
 
+  useEffect(() => {
+    const sync = () => {
+      setSignedIn(hasSavedMicrosoftLogin())
+      setProfileName(getSavedProfileName())
+    }
+    sync()
+
+    const onAuthChanged = () => sync()
+    window.addEventListener('auth:changed', onAuthChanged as any)
+    return () => window.removeEventListener('auth:changed', onAuthChanged as any)
+  }, [])
+
+  // -----------------------------
+  // Splash text
+  // -----------------------------
   const splashText = useMemo(() => {
     const cachedText = getCachedSplashText()
-    const configSplashFromApp = appConfig?.splashText
-    const isRemote =
-      !!configSplashFromApp && isRemoteSplashText(configSplashFromApp)
-
-    const sourceKey = isRemote
-      ? configSplashFromApp
-      : configSplashFromApp || ''
-
+    const configSplash = appConfig?.splashText
+    const isRemote = configSplash && isRemoteSplashText(configSplash)
+    const sourceKey = isRemote ? configSplash : configSplash || ''
     const storedSourceKey = localStorage.getItem('minecraft_splash_url')
 
     if (storedSourceKey !== sourceKey) {
@@ -54,13 +93,13 @@ export default function MainMenu({
       return cachedText
     }
 
-    if (!isRemote && configSplashFromApp?.trim()) {
-      cacheSplashText(configSplashFromApp)
-      return configSplashFromApp
+    if (!isRemote && configSplash?.trim()) {
+      cacheSplashText(configSplash)
+      return configSplash
     }
 
-    return appConfig?.splashTextFallback || ''
-  }, [appConfig])
+    return appConfig?.splashTextFallback || 'Welcome!'
+  }, [appConfig?.splashText, appConfig?.splashTextFallback])
 
   useEffect(() => {
     const splash = appConfig?.splashText
@@ -71,35 +110,36 @@ export default function MainMenu({
     }
   }, [appConfig?.splashText])
 
-  /* ================= VERSION LONG PRESS ================= */
-
+  // -----------------------------
+  // Version long-press
+  // -----------------------------
   const versionLongPress = useLongPress(() => {
     const buildDate = process.env.BUILD_VERSION
       ? new Date(process.env.BUILD_VERSION + ':00:00.000Z')
       : null
-
-    alert(
-      `BUILD DATE:\n${buildDate?.toLocaleString() || 'Development build'}`
-    )
+    alert(`BUILD DATE:\n${buildDate?.toLocaleString() || 'Development build'}`)
   })
 
-  /* ================= PLAY ================= */
-
+  // -----------------------------
+  // Actions
+  // -----------------------------
   const onPlayClick = () => {
     window.dispatchEvent(
       new CustomEvent('connect', {
         detail: {
           server: 'play.shadowvalesurvival.com:25565',
-          authenticatedAccount: true,
-          proxy: 'https://proxy.mcraft.fun',
+          authenticatedAccount: true, // will now use saved MS cache
+	  proxy: 'https://proxy.mcraft.fun',
           botVersion: '1.21.8',
         },
       })
     )
   }
 
-  /* ================= RENDER ================= */
 
+  // -----------------------------
+  // Render
+  // -----------------------------
   return (
     <div className={styles.root}>
       <div className={styles['game-title']}>
@@ -110,13 +150,10 @@ export default function MainMenu({
       </div>
 
       <div className={styles.menu}>
-        {/* PLAY */}
         <Button onClick={onPlayClick}>Play</Button>
 
-        {/* OPTIONS */}
         <Button onClick={optionsAction}>Options</Button>
 
-        {/* STORE / DISCORD */}
         <div className={styles['menu-row']}>
           <PauseLinkButtons />
         </div>
@@ -127,13 +164,11 @@ export default function MainMenu({
           <span style={{ fontSize: 10, color: 'gray' }} {...versionLongPress}>
             {versionText}
           </span>
-
           <span
             title={versionTitle}
-            onClick={onVersionStatusClick}
             className={styles['product-info']}
           >
-            Minecraft 1.21.8 {versionStatus}
+            Minecraft 1.21.8
           </span>
         </div>
 

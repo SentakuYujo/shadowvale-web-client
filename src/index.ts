@@ -103,6 +103,26 @@ import { getCurrentProxy, getCurrentUsername } from './react/ServersList'
 window.debug = debug
 window.beforeRenderFrame = []
 
+// Persist a simple Microsoft-auth marker in localStorage so UI (MainMenu) can
+// reflect signed-in state without needing to know internal token storage.
+// This is separate from the account cache used by the auth flow.
+const MS_AUTH_STORAGE_KEY = 'microsoft-auth'
+
+export const setMicrosoftAuthMarker = (payload: { username?: string } = {}) => {
+  try {
+    localStorage.setItem(
+      MS_AUTH_STORAGE_KEY,
+      JSON.stringify({ username: payload.username ?? null, ts: Date.now() })
+    )
+  } catch {}
+}
+
+export const clearMicrosoftAuthMarker = () => {
+  try {
+    localStorage.removeItem(MS_AUTH_STORAGE_KEY)
+  } catch {}
+}
+
 // ACTUAL CODE
 
 void registerServiceWorker().then(() => {
@@ -143,6 +163,35 @@ function listenGlobalEvents () {
     const options = (e as CustomEvent).detail
     void connect(options)
   })
+
+  // MainMenu "Sign in with Microsoft" button.
+  // In this client, Microsoft auth happens as part of creating a session during connect.
+  // So we initiate a connect using the configured defaults (and we won't save the server to history).
+  window.addEventListener('auth:microsoft', () => {
+    const fallbackServer = miscUiState.appConfig?.defaultHost ?? 'play.shadowvalesurvival.com'
+    const fallbackProxy = miscUiState.appConfig?.defaultProxy
+    void connect({
+      username: options.localUsername || 'Player',
+      server: fallbackServer.includes(':') ? fallbackServer : `${fallbackServer}:25565`,
+      proxy: fallbackProxy,
+      authenticatedAccount: true,
+      saveServerToHistory: false
+    })
+  })
+
+  // Optional: allow manual sign-out from UI.
+  // Usage: window.dispatchEvent(new CustomEvent('auth:logout'))
+  window.addEventListener('auth:logout', () => {
+    clearMicrosoftAuthMarker()
+    updateAuthenticatedAccountData(() => [])
+    // Best-effort: clear the currently selected account override for the loaded server.
+    updateLoadedServerData((s) => ({
+      ...s,
+      authenticatedAccountOverride: undefined
+    }), undefined as any)
+    window.dispatchEvent(new CustomEvent('auth:changed', { detail: { signedIn: false } }))
+  })
+
   window.addEventListener('singleplayer', (e) => {
     const { detail } = (e as CustomEvent)
     const { connectOptions, ...rest } = detail
@@ -552,27 +601,34 @@ export async function connect (connectOptions: ConnectOptions) {
               })
             })
           ])
-          if (signInMessageState.shouldSaveToken) {
-            updateAuthenticatedAccountData(accounts => {
-              const existingAccount = accounts.find(a => a.username === client.username)
-              if (existingAccount) {
-                existingAccount.cachedTokens = { ...existingAccount.cachedTokens, ...newTokensCacheResult }
-              } else {
-                accounts.push({
-                  username: client.username,
-                  cachedTokens: { ...cachedTokens, ...newTokensCacheResult }
-                })
-              }
-              return accounts
-            })
-            updateDataAfterJoin = () => {
-              updateLoadedServerData(s => ({ ...s, authenticatedAccountOverride: client.username }), connectOptions.serverIndex)
-            }
-          } else {
-            updateDataAfterJoin = () => {
-              updateLoadedServerData(s => ({ ...s, authenticatedAccountOverride: undefined }), connectOptions.serverIndex)
-            }
+          // Always persist the tokens/profile after a successful auth so the user stays signed in
+          // when they back out of the connect flow (and so "Play" can reuse the cached tokens).
+          // `newTokensCacheResult` can be null/undefined on some flows (e.g. aborted), so guard.
+          const mergedTokens = {
+            ...cachedTokens,
+            ...(newTokensCacheResult ?? {})
           }
+
+          updateAuthenticatedAccountData(accounts => {
+            const existingAccount = accounts.find(a => a.username === client.username)
+            if (existingAccount) {
+              existingAccount.cachedTokens = { ...existingAccount.cachedTokens, ...mergedTokens }
+            } else {
+              accounts.push({
+                username: client.username,
+                cachedTokens: mergedTokens
+              })
+            }
+            return accounts
+          })
+
+          updateDataAfterJoin = () => {
+            updateLoadedServerData(s => ({ ...s, authenticatedAccountOverride: client.username }), connectOptions.serverIndex)
+          }
+
+          // Let the UI know sign-in state changed (optional to handle).
+          window.dispatchEvent(new CustomEvent('auth:changed', { detail: { signedIn: true, username: client.username } }))
+          setMicrosoftAuthMarker({ username: client.username })
           setLoadingScreenStatus('Authentication successful. Logging in to server')
         } finally {
           signInMessageState.code = ''
