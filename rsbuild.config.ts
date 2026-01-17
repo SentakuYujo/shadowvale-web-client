@@ -119,11 +119,11 @@ const appConfig = defineConfig({
           }
 
           // --- RESOURCE PACK ---
-          if (fs.existsSync('./assets/resourcepack.zip')) {
+          if (fs.existsSync('./assets/generated.zip')) {
             console.log('[Shadowvale] Copying resource pack...')
             fs.copyFileSync(
-              './assets/resourcepack.zip',
-              './dist/resourcepack.zip'
+              './assets/generated.zip',
+              './dist/generated.zip'
             )
           }
 
@@ -132,6 +132,9 @@ const appConfig = defineConfig({
             fs.copyFileSync('./assets/_headers', './dist/_headers')
           }
 
+          if (fs.existsSync('./assets/_redirects')) {
+            fs.copyFileSync('./assets/_redirects', './dist/_redirects')
+          }
           // --- Config.json for REMOTE mode ---
           if (configSource === 'REMOTE') {
             fs.writeFileSync(

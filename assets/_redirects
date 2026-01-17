@@ -1,0 +1,6 @@
+/generated.zip   /generated.zip   200
+/resourcepack.zip /resourcepack.zip 200
+/background/*    /background/:splat 200
+/splashes.json   /splashes.json   200
+
+/*              /index.html       200

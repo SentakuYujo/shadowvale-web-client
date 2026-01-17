@@ -1,6 +1,13 @@
 /generated.zip
   Content-Type: application/zip
   Access-Control-Allow-Origin: *
-  Access-Control-Allow-Headers: *
   Access-Control-Allow-Methods: GET, HEAD, OPTIONS
-  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Headers: *
+  Cache-Control: public, max-age=300
+
+/resourcepack.zip
+  Content-Type: application/zip
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, HEAD, OPTIONS
+  Access-Control-Allow-Headers: *
+  Cache-Control: public, max-age=300
