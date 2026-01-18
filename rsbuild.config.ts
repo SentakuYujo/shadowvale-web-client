@@ -127,6 +127,13 @@ const appConfig = defineConfig({
             )
           }
 
+	  // --- MUSIC ---
+          if (fs.existsSync('./assets/music')) {
+            console.log('Copying menu music...')
+            fsExtra.copySync('./assets/music', './dist/music')
+          }
+
+
           // --- NETLIFY HEADERS (CORS) ---
           if (fs.existsSync('./assets/_headers')) {
             fs.copyFileSync('./assets/_headers', './dist/_headers')
