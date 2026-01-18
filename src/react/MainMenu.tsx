@@ -166,7 +166,7 @@ export default function MainMenu({
           server: 'play.shadowvalesurvival.com:25565',
           authenticatedAccount: true,
 	  proxy: 'https://proxy.mcraft.fun',
-	  botVersion: '1.21.8'
+	  botVersion: '1.21.8',
         },
       })
     )

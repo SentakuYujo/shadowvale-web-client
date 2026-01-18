@@ -108,7 +108,7 @@ app.get('/splashes.json', (req, res) => {
 app.get('/resourcepack.zip', async (req, res) => {
   try {
     const RESOURCE_PACK_URL =
-      'https://pack.shadowvalesurvival.com/generated.zip'
+      'https://files.catbox.moe/sr2pnp.zip'
 
     const response = await fetch(RESOURCE_PACK_URL)
 

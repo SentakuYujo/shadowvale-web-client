@@ -13,11 +13,8 @@ overrides:
   diamond-square: github:zardoy/diamond-square
   prismarine-block: github:zardoy/prismarine-block#next-era
   prismarine-world: github:zardoy/prismarine-world#next-era
-  minecraft-data: 3.98.0
   prismarine-provider-anvil: github:zardoy/prismarine-provider-anvil#everything
-  prismarine-physics: github:zardoy/prismarine-physics
   minecraft-protocol: github:PrismarineJS/node-minecraft-protocol#master
-  react: ^18.2.0
   prismarine-chunk: github:zardoy/prismarine-chunk#master
   prismarine-item: latest
 
@@ -139,8 +136,8 @@ importers:
         specifier: ^0.1.23
         version: 0.1.23(encoding@0.1.13)(mineflayer@https://codeload.github.com/zardoy/mineflayer/tar.gz/dd3b1ff38506d6f72d90e8444186e4e75fe82659(encoding@0.1.13))
       minecraft-data:
-        specifier: 3.98.0
-        version: 3.98.0
+        specifier: 3.102.3
+        version: 3.102.3
       minecraft-protocol:
         specifier: github:PrismarineJS/node-minecraft-protocol#master
         version: https://codeload.github.com/PrismarineJS/node-minecraft-protocol/tar.gz/bf89f7e86526c54d8c43f555d8f6dfa4948fd2d9(patch_hash=4ebdae314c68d01ce7879445c0b8bde5f90373abba8b66ed00d42e7a5f542f8b)(encoding@0.1.13)
@@ -167,7 +164,7 @@ importers:
         version: 6.1.1
       prismarine-provider-anvil:
         specifier: github:zardoy/prismarine-provider-anvil#everything
-        version: https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.98.0)
+        version: https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.102.3)
       prosemirror-example-setup:
         specifier: ^1.2.2
         version: 1.2.3
@@ -270,7 +267,7 @@ importers:
         version: 7.6.21(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
       '@storybook/react-vite':
         specifier: ^7.4.6
-        version: 7.6.21(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@2.79.2)(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.45.0))
+        version: 7.6.21(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@2.79.2)(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.46.0))
       '@types/diff-match-patch':
         specifier: ^1.0.36
         version: 1.0.36
@@ -387,7 +384,7 @@ importers:
         version: 5.5.4
       vitest:
         specifier: ^0.34.6
-        version: 0.34.6(terser@5.45.0)
+        version: 0.34.6(terser@5.46.0)
       yaml:
         specifier: ^2.3.2
         version: 2.8.2
@@ -403,7 +400,7 @@ importers:
         version: 0.33.5
       systeminformation:
         specifier: ^5.21.22
-        version: 5.30.3
+        version: 5.30.5
 
   renderer:
     dependencies:
@@ -436,7 +433,7 @@ importers:
         version: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
       prismarine-chunk:
         specifier: github:zardoy/prismarine-chunk#master
-        version: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.98.0)
+        version: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.102.3)
       prismarine-schematic:
         specifier: ^1.2.0
         version: 1.2.3
@@ -480,7 +477,7 @@ importers:
     dependencies:
       vite:
         specifier: ^4.4.9
-        version: 4.5.14(@types/node@25.0.9)(terser@5.45.0)
+        version: 4.5.14(@types/node@25.0.9)(terser@5.46.0)
 
 packages:
 
@@ -1074,7 +1071,7 @@ packages:
   '@dimaka/interface@0.0.3-alpha.0':
     resolution: {integrity: sha512-BzRUaLk+jhC1uvcix4SXRGhw7k39pldlvwtRT0NGFsuQt1uMV9vOhGMzm3rLorVXQ7vAmqcZk3Hy8oYlXKQoDw==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^17.0.2
 
   '@discoveryjs/json-ext@0.5.7':
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
@@ -1107,7 +1104,7 @@ packages:
     resolution: {integrity: sha512-O000MLDBDdk/EohJPFUqvnp4qnHeYkVP5B0xEG0D/L7cOKP9kefu2DXn8dj74cQfsEzUqh+sr1RzFqiL1o+PpA==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: '>=16.8.0'
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -1124,7 +1121,7 @@ packages:
   '@emotion/use-insertion-effect-with-fallbacks@1.2.0':
     resolution: {integrity: sha512-yJMtVdH59sxi/aVJBpk9FQq+OR8ll5GT8oWd57UpeaKEVGab41JWaCFA7FRLoMLloOZF/c/wsPoe+bfGmRKgDg==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.8.0'
 
   '@emotion/utils@1.4.2':
     resolution: {integrity: sha512-3vLclRofFziIa3J2wDh9jjbkUz9qk5Vi3IZ/FSTKViB0k+ef0fPV7dYrUIugbgupYDx7v9ud/SjrtEP8Y4xLoA==}
@@ -1592,13 +1589,13 @@ packages:
   '@floating-ui/react-dom@2.1.6':
     resolution: {integrity: sha512-4JX6rEatQEvlmgU80wZyq9RT96HZJa88q8hp0pBd+LrczeDI4o6uA2M+uvxngVHo4Ihr8uibXxH6+70zhAFrVw==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
   '@floating-ui/react@0.26.28':
     resolution: {integrity: sha512-yORQuuAtVpiRjpMhdc0wJj06b9JFjrYF4qp96j++v2NBpbi6SEGF7donUJ3TMieerQ6qVkAv1tgr7L4r5roTqw==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
   '@floating-ui/utils@0.2.10':
@@ -2008,7 +2005,7 @@ packages:
   '@mdx-js/react@2.3.0':
     resolution: {integrity: sha512-zQH//gdOmuu7nt2oJR29vFhDv88oGPmVw6BggmrHeMI+xgEkp1B2dX9/bMBSYtK0dyLX/aOmesKS09g222K1/g==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16'
 
   '@module-federation/error-codes@0.11.2':
     resolution: {integrity: sha512-ik1Qnn0I+WyEdprTck9WGlH41vGsVdUg8cfO+ZM02qOb2cZm5Vu3SlxGAobj6g7uAj0g8yINnd7h7Dci40BxQA==}
@@ -2035,7 +2032,7 @@ packages:
     resolution: {integrity: sha512-cyzXQCtO47ydzxpQtCGSQGOC8Gk3ZUeBXFAxD+CWXYFo5OqZyZUonFl0DwUlTyAfRHntBfw2p3w4s9R6oe1eCA==}
     peerDependencies:
       monaco-editor: '>= 0.25.0 < 1'
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@msgpack/msgpack@2.8.0':
@@ -2102,7 +2099,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2115,7 +2112,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2128,7 +2125,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -2140,7 +2137,7 @@ packages:
     resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2149,7 +2146,7 @@ packages:
     resolution: {integrity: sha512-z4eqJvfiNnFMHIIvXP3CY57y2WJs5g2v3X0zm9mEJkrkNv4rDxu+sg9Jh8EkXyeqBkB7SOcboo9dMVqhyrACIg==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2158,7 +2155,7 @@ packages:
     resolution: {integrity: sha512-ebbrdFoYTcuZ0v4wG5tedGnp9tzcV8awzsxYph7gXUyvnNLuTIcCk1q17JEbnVhXAKG9oX3KtchwiMIAYp9NLg==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2167,7 +2164,7 @@ packages:
     resolution: {integrity: sha512-jCi/QKUM2r1Ju5a3J64TH2A5SpKAgh0LpknyqdQ4m6DCV0xJ2HG1xARRwNGPQfi1SLdLWZ1OJz6F4OMBBNiGJA==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2176,7 +2173,7 @@ packages:
     resolution: {integrity: sha512-RXcvnXgyvYvBEOhCBuddKecVkoMiI10Jcm5cTI7abJRAHYfFxeu+FBQs/DvdxSYucxR5mna0dNsL6QFlds5TMA==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2185,7 +2182,7 @@ packages:
     resolution: {integrity: sha512-1UEWRX6jnOA2y4H5WczZ44gOOjTEmlqv1uNW4GAJEO5+bauCBhv8snY65Iw5/VOS/ghKN9gr2KjnLKxrsvoMVw==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2195,7 +2192,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2207,7 +2204,7 @@ packages:
     resolution: {integrity: sha512-Rect2dWbQ8waGzhMavsIbmSVCgYxkXLxxR3ZvCX79JOglzdEy4JXMb98lq4hPxUbLr77nP0UOGf4rcMU+s1pUA==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2217,7 +2214,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2229,7 +2226,7 @@ packages:
     resolution: {integrity: sha512-tI7sT/kqYp8p96yGWY1OAnLHrqDgzHefRBKQ2YAkBS5ja7QLcZ9Z/uY7bEjPUatf8RomoXM8/1sMj1IJaE5UzQ==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2238,7 +2235,7 @@ packages:
     resolution: {integrity: sha512-kGkGegYIdQsOb4XjsfM97rXsiHaBwco+hFI66oO4s9LU+PLAC5oJ7khdOVFxkhsmlbpUqDAvXw11CluXP+jkHg==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2248,7 +2245,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2261,7 +2258,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2274,7 +2271,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2287,7 +2284,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -2300,7 +2297,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -2313,7 +2310,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2326,7 +2323,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -2338,7 +2335,7 @@ packages:
     resolution: {integrity: sha512-YeTpuq4deV+6DusvVUW4ivBgnkHwECUu0BiN43L5UCDFgdhsRUWAghhTF5MbvNTPzmiFOx90asDSUjWuCNapwg==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2347,7 +2344,7 @@ packages:
     resolution: {integrity: sha512-aeNmHnBxbi2St0au6VBVC7JXFlhLlOnvIIlePNniyUNAClzmtAUEY8/pBiK3iHjufOlwA+c20/8jngo7xcrg8A==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2357,7 +2354,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -2370,7 +2367,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -2383,7 +2380,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -2395,7 +2392,7 @@ packages:
     resolution: {integrity: sha512-D94LjX4Sp0xJFVaoQOd3OO9k7tpBYNOXdVhkltUbGv2Qb9OXdrg/CpsjlZv7ia14Sylv398LswWBVVu5nqKzAQ==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2404,7 +2401,7 @@ packages:
     resolution: {integrity: sha512-FkBMwD+qbGQeMu1cOHnuGB6x4yzPjho8ap5WtbEJ26umhgqVXbhekKUQO+hZEL1vU92a3wHwdp0HAcqAUF5iDg==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2413,7 +2410,7 @@ packages:
     resolution: {integrity: sha512-Svl5GY5FQeN758fWKrjM6Qb7asvXeiZltlT4U2gVfl8Gx5UAv2sMR0LWo8yhsIZh2oQ0eFdZ59aoOOMV7b47VA==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2422,7 +2419,7 @@ packages:
     resolution: {integrity: sha512-BjasUjixPFdS+NKkypcyyN5Pmg83Olst0+c6vGov0diwTEo6mgdqVR6hxcEgFuh4QrAs7Rc+9KuGJ9TVCj0Zzg==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2431,7 +2428,7 @@ packages:
     resolution: {integrity: sha512-Qp8WbZOBe+blgpuUT+lw2xheLP8q0oatc9UpmiemEICxGvFLYmHm9QowVZGHtJlGbS6A6yJ3iViad/2cVjnOiA==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2440,7 +2437,7 @@ packages:
     resolution: {integrity: sha512-vyL82j40hcFicA+M4Ex7hVkB9vHgSse1ZWomAqV2Je3RleKGO5iM8KMOEtfoSB0PnIelMd2lATjTGMYqN5ylTg==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2449,7 +2446,7 @@ packages:
     resolution: {integrity: sha512-v/5RegiJWYdoCvMnITBkNNx6bCj20fiaJnWtRkU18yITptraXjffz5Qbn05uOiQnOvi+dbkznkoaMltz1GnszQ==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2458,7 +2455,7 @@ packages:
     resolution: {integrity: sha512-RbJRS4UWQFkzHTTwVymMTUv8EqYhOp8dOOviLj2ugtTiXRaRQS7GLGxZTLL1jWhMeoSCf5zmcZkqTl9IiYfXcQ==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2467,7 +2464,7 @@ packages:
     resolution: {integrity: sha512-cV5La9DPwiQ7S0gf/0qiD6YgNqM5Fk97Kdrlc5yBcrF3jyEZQwm7vYFqMo4IfeHgJXsRaMvLABFtd0OVEmZhDw==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2476,7 +2473,7 @@ packages:
     resolution: {integrity: sha512-Cq5DLuSiuYVKNU8orzJMbl15TXilTnJKUCltMVQg53BQOF1/C5toAaGrowkgksdBQ9H+SRL23g0HDmg9tvmxXw==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2485,7 +2482,7 @@ packages:
     resolution: {integrity: sha512-ibay+VqrgcaI6veAojjofPATwledXiSmX+C0KrBk/xgpX9rBzPV3OsfwlhQdUOFbh+LKQorLYT+xTXW9V8yd0g==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -2495,7 +2492,7 @@ packages:
     peerDependencies:
       '@types/react': '*'
       '@types/react-dom': '*'
-      react: ^18.2.0
+      react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
     peerDependenciesMeta:
       '@types/react':
@@ -2509,7 +2506,7 @@ packages:
   '@react-oauth/google@0.12.2':
     resolution: {integrity: sha512-d1GVm2uD4E44EJft2RbKtp8Z1fp/gK8Lb6KHgs3pHlM0PxCXGLaq8LLYQYENnN4xPWO1gkL4apBtlPKzpLvZwg==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
   '@rollup/plugin-babel@5.3.1':
@@ -2701,13 +2698,13 @@ packages:
   '@storybook/addon-docs@7.6.21':
     resolution: {integrity: sha512-9sXDaDvMb+L2Mulzk/3LJ6F1Dq1UVAhj61DI7SlKdcmQrVZet+F/PyQqofBunEvmR3jaX4AlAu7erb/bw8hlqg==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@storybook/addon-essentials@7.6.21':
     resolution: {integrity: sha512-l+uiuNwLrWjvymGbDTXR7UO0kIu3AfsbNDk6ho48zeYR95TcTaKywkZ7K+p2kG9aJ0iNH8rbSHjR072x6gFAFA==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@storybook/addon-highlight@7.6.21':
@@ -2716,7 +2713,7 @@ packages:
   '@storybook/addon-links@7.6.21':
     resolution: {integrity: sha512-1ZGuk6j2r7muzZaeT6fdPBVJnQqOgS5O5myR2kFtyXOloJVahNr94ICOdNjC90sP5SKisw4dW7BabbGpPSEZKw==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -2736,7 +2733,7 @@ packages:
   '@storybook/blocks@7.6.21':
     resolution: {integrity: sha512-B1fttVQRbKVWr9MaZEvh9vlJbrVQ20YR0EjN/uHAHCxvV1DF0ViWPRF/t1bqNCeUarEuet9WIMrNX/qXz7OTkA==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@storybook/builder-manager@7.6.21':
@@ -2773,7 +2770,7 @@ packages:
   '@storybook/components@7.6.21':
     resolution: {integrity: sha512-C3YX/IWNpvarwC2IYtGRTzxKL/U7wkdHWMHBhun4ndLnkU1btSVX26E4iZnXJKXbiqmYOzJcb4YTFlvQtpDzVg==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@storybook/core-client@7.6.21':
@@ -2830,14 +2827,14 @@ packages:
   '@storybook/react-dom-shim@7.6.21':
     resolution: {integrity: sha512-YklmjnLDpdmGIWqKcRii4dosQRydBApnOPHboVXUV2D1X4tUNRCXqoJztgVwxl2/8PlncM8HatBLDFqpLI4P0A==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@storybook/react-vite@7.6.21':
     resolution: {integrity: sha512-MiBY0QtBvH9ZVwBClTh18JAsyXtAXPPkuaqwkTArexvEtQ26a0So7zd+dodgjGVFngauQP4yXmOvtzK5aOn+Ug==}
     engines: {node: '>=16'}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
       vite: ^3.0.0 || ^4.0.0 || ^5.0.0
 
@@ -2845,7 +2842,7 @@ packages:
     resolution: {integrity: sha512-UlkVEhROZc7PAoVsX3DlwLn2ngp8yOfU7moJjOIlzfF4KGTyHP8IAMNvhFLvlhVfz4YqMFZE5dngtAH8iyR6DQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
       typescript: '*'
     peerDependenciesMeta:
@@ -2861,7 +2858,7 @@ packages:
   '@storybook/theming@7.6.21':
     resolution: {integrity: sha512-x3nfuIc7OcIk8IjXdENwfM0TjjjCFlhObss5HCFO1xHBtROw+6IRHWhb982mtqS7OL61XNJAhc91lq79toFowg==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   '@storybook/types@7.6.21':
@@ -3374,7 +3371,7 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       '@nextui-org/react': ^2.4.6
-      react: ^18.2.0
+      react: '>=18.0.0'
       react-dom: '>=18.0.0'
     peerDependenciesMeta:
       '@nextui-org/react':
@@ -3727,8 +3724,8 @@ packages:
     resolution: {integrity: sha512-5T6P4xPgpp0YDFvSWwEZ4NoE3aM4QBQXDzmVbraCkFj8zHM+mba8SyqB5DbZWyR7mYHo6Y7BdQo3MoA4m0TeQg==}
     engines: {node: '>=0.10.0'}
 
-  baseline-browser-mapping@2.9.14:
-    resolution: {integrity: sha512-B0xUquLkiGLgHhpPBqvl7GWegWBUNuujQ6kXd/r1U38ElPT6Ok8KZ8e+FpUGEc2ZoRQUzq/aUnaKFc/svWUGSg==}
+  baseline-browser-mapping@2.9.15:
+    resolution: {integrity: sha512-kX8h7K2srmDyYnXRIppo4AH/wYgzWVCs+eKr3RusRSQ5PvRYoEFmR/I0PbdTjKFAoKqp5+kbxnNTFO9jOfSVJg==}
     hasBin: true
 
   basic-auth@2.0.1:
@@ -5177,8 +5174,8 @@ packages:
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
 
-  flow-parser@0.296.1:
-    resolution: {integrity: sha512-dASEzkw6jlgYx1poIqbf8f21OiyD5f0ebEbvwZVohEixE7agpGb+HbAL35BrzAUyb390nfRfFOsG+alNx1Sqww==}
+  flow-parser@0.297.0:
+    resolution: {integrity: sha512-51kjVLwebsDNCrBrm+VLBJ1rEZffrWzsEPjfbdhf/0lxQkX01zFoiojwEW7l6902p1ZQI/ju/QmLGowwne23lg==}
     engines: {node: '>=0.4.0'}
 
   follow-redirects@1.15.11:
@@ -5225,7 +5222,7 @@ packages:
     resolution: {integrity: sha512-lflOQEdjquUi9sCg5Y1LrsZDlsjrHw7m0T9Yedvnk7Bnhqfkc89/Uha10J3CFhkL+TCZVCRw9eUGyM/lyYhXQA==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
-      react: ^18.2.0
+      react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       '@emotion/is-prop-valid':
@@ -6409,7 +6406,7 @@ packages:
     resolution: {integrity: sha512-7mG/1feQ0TX5I7YyMZVDgCC/y2I3CiEhIRQIhyov9nGBP5eoVrOXXHuL5ZP8GRfxVZKRiXWJgwXkb9It+nQZfQ==}
     engines: {node: '>= 10'}
     peerDependencies:
-      react: ^18.2.0
+      react: '>= 0.14.0'
     peerDependenciesMeta:
       react:
         optional: true
@@ -6431,7 +6428,7 @@ packages:
     resolution: {integrity: sha512-H9jPt2xEU77itC27dSz3qazHYqN9qVsv4HgMPozg7RqQ1uwgXmEa+ojKIlDtXf/TLJsG6Kv4EbzGa8a1Wh72uA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
-      minecraft-data: 3.98.0
+      minecraft-data: ^3.95.0
 
   mcraft-fun-mineflayer@0.1.23:
     resolution: {integrity: sha512-qmI1rQQ0Ro5zJdi99rClWLF+mS9JZffgNX2vyWWesS3Hsk3Xblp/8swYTJKHSaFpNgzkVfXV92fEIrBqeH6iKA==}
@@ -6483,8 +6480,8 @@ packages:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
 
-  memfs@4.52.0:
-    resolution: {integrity: sha512-dG5ZY1wUCPWhtl4M2mlc7Wx4OrMGtiI79axnScxwDoPR/25biQYrYm21OpKyZcnKv8pvWaX95SRtZgecZ84gFg==}
+  memfs@4.53.0:
+    resolution: {integrity: sha512-TKFRsKjJA30iAc9ZeGH/77v5nLcNUD0GBOL/tAj4O63RPIKNxGDZ54ZyuQM4KjEKEj7gfer/Ta1xAzB+HrEnrA==}
 
   memoize-one@6.0.0:
     resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
@@ -6640,8 +6637,14 @@ packages:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
 
-  minecraft-data@3.98.0:
-    resolution: {integrity: sha512-JAPqJ/TZoxMUlAPPdWUh1v5wdqvYGFSZ4rW9bUtmaKBkGpomDSjw4V02ocBqbxKJvcTtmc5nM/LfN9/0DDqHrQ==}
+  minecraft-data@2.221.0:
+    resolution: {integrity: sha512-0AhqzbIKb6WqPSF6qBevaPryeWOz545hLxt6q+gfJF8YIQX/YfkyX/nXWhl+pSIS2rTBcQ0RJkRCtTeRzQwHDA==}
+
+  minecraft-data@3.102.3:
+    resolution: {integrity: sha512-JxUPTUlamQ04GSK7YI3657BRurHLBRAhsmPb4gajd4z/p6t3LJh4l0HWIyNHRpJbQiUCIjn+mhos5oB+yqH0mQ==}
+
+  minecraft-data@3.67.0:
+    resolution: {integrity: sha512-/hLeYXopx9o1UdViPPFenLJ3hT5S4qUEwLQM0MAHOIhqkAUGXdkl47O7ohG+f87DH3+cZksbbM61sTnSRsQpsA==}
 
   minecraft-folder-path@1.2.0:
     resolution: {integrity: sha512-qaUSbKWoOsH9brn0JQuBhxNAzTDMwrOXorwuRxdJKKKDYvZhtml+6GVCUrY5HRiEsieBEjCUnhVpDuQiKsiFaw==}
@@ -6805,7 +6808,7 @@ packages:
   nano-css@5.6.2:
     resolution: {integrity: sha512-+6bHaC8dSDGALM1HJjOHVXpuastdu2xFoZlC77Jh4cg+33Zcgm+Gxd+1xsnpZK14eyHObSp82+ll5y3SX75liw==}
     peerDependencies:
-      react: ^18.2.0
+      react: '*'
       react-dom: '*'
 
   nanoid@3.3.11:
@@ -6851,8 +6854,8 @@ packages:
   no-case@3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
 
-  node-abi@3.85.0:
-    resolution: {integrity: sha512-zsFhmbkAzwhTft6nd3VxcG0cvJsT70rL+BIGHWVq5fi6MwGrHwzqKaxXE+Hl2GmnGItnDKPPkO5/LQqjVkIdFg==}
+  node-abi@3.86.0:
+    resolution: {integrity: sha512-sn9Et4N3ynsetj3spsZR729DVlGH6iBG4RiDMV7HEp3guyOW6W3S0unGpLDxT50mXortGUMax/ykUNQXdqc/Xg==}
     engines: {node: '>=10'}
 
   node-addon-api@5.1.0:
@@ -7378,7 +7381,7 @@ packages:
   prismarine-biome@1.3.0:
     resolution: {integrity: sha512-GY6nZxq93mTErT7jD7jt8YS1aPrOakbJHh39seYsJFXvueIOdHAmW16kYQVrTVMW5MlWLQVxV/EquRwOgr4MnQ==}
     peerDependencies:
-      minecraft-data: 3.98.0
+      minecraft-data: ^3.0.0
       prismarine-registry: ^1.1.0
 
   prismarine-block@https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9:
@@ -7402,9 +7405,8 @@ packages:
   prismarine-nbt@2.8.0:
     resolution: {integrity: sha512-5D6FUZq0PNtf3v/41ImDlwThVesOv5adyqCRMZLzmkUGEmRJNNh5C6AsnvrClBftXs+IF0yqPnZoj8kcNPiMGg==}
 
-  prismarine-physics@https://codeload.github.com/zardoy/prismarine-physics/tar.gz/353e25b800149393f40539ec381218be44cbb03b:
-    resolution: {tarball: https://codeload.github.com/zardoy/prismarine-physics/tar.gz/353e25b800149393f40539ec381218be44cbb03b}
-    version: 1.9.0
+  prismarine-physics@1.10.0:
+    resolution: {integrity: sha512-FE2xUSDhrdgjlJFtBPMTQt1FX3uG2YvKceRvoMmhcCni0MrS8365ZlbIcW06SB1sKIpoNQWanS5LuefynzwdXQ==}
 
   prismarine-provider-anvil@https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7:
     resolution: {tarball: https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7}
@@ -7574,7 +7576,7 @@ packages:
   qrcode.react@3.2.0:
     resolution: {integrity: sha512-YietHHltOHA4+l5na1srdaMx4sVSOjV9tamHs+mwiLWAMr6QVACRUw1Neax5CptFILcNoITctJY0Ipyn5enQ8g==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   qs@6.10.4:
     resolution: {integrity: sha512-OQiU+C+Ds5qiH91qh/mg0w+8nwQuLjM4F4M/PbmhDOoYehPh+Fb0bDjtR1sOvy7YKxvj28Y/M0PhP5uVX0kB+g==}
@@ -7650,7 +7652,7 @@ packages:
   react-colorful@5.6.1:
     resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
   react-docgen-typescript@2.4.0:
@@ -7665,12 +7667,12 @@ packages:
   react-dom@18.3.1:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^18.3.1
 
   react-element-to-jsx-string@15.0.0:
     resolution: {integrity: sha512-UDg4lXB6BzlobN60P8fHWVPX3Kyw8ORrTeBtClmIlGdkOOE+GYQSFvmEU5iLLpwp/6v42DINwNcwOhOLfQ//FQ==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
       react-dom: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
 
   react-fast-compare@3.2.2:
@@ -7680,7 +7682,7 @@ packages:
     resolution: {integrity: sha512-9SUJKCGKo8HUSsCO+y0CtqkqI5nNuaDqTxyqPsZPqIwudpj4rCrAz/jZV+jn57bx5gtZKOh3neQu94DXMc+w5w==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17 || ^18 || ^19
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -7695,13 +7697,13 @@ packages:
     resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
     peerDependencies:
       '@popperjs/core': ^2.0.0
-      react: ^18.2.0
+      react: ^16.8.0 || ^17 || ^18
       react-dom: ^16.8.0 || ^17 || ^18
 
   react-portal@4.2.1:
     resolution: {integrity: sha512-fE9kOBagwmTXZ3YGRYb4gcMy+kSA+yLO0xnPankjRlfBv4uCpFXqKPfkpsGQQR15wkZ9EssnvTOl1yMzbkxhPQ==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0
       react-dom: ^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0
 
   react-refresh@0.14.2:
@@ -7717,7 +7719,7 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -7727,7 +7729,7 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -7735,7 +7737,7 @@ packages:
   react-select@5.10.2:
     resolution: {integrity: sha512-Z33nHdEFWq9tfnfVXaiM12rbJmk+QjFEztWLtmXqQhz6Al4UZZ9xc0wiatmGtUOCCnHN0WizL3tCMYRENX4rVQ==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react-style-singleton@2.2.3:
@@ -7743,7 +7745,7 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -7751,33 +7753,37 @@ packages:
   react-transition-group@4.4.5:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.6.0'
       react-dom: '>=16.6.0'
 
   react-universal-interface@0.6.2:
     resolution: {integrity: sha512-dg8yXdcQmvgR13RIlZbTRQOoUrDciFVoSBZILwjE2LFISxZZ8loVJKAkuzswl5js8BHda79bIb2b84ehU8IjXw==}
     peerDependencies:
-      react: ^18.2.0
+      react: '*'
       tslib: '*'
 
   react-use-measure@2.1.1:
     resolution: {integrity: sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.13'
       react-dom: '>=16.13'
 
   react-use@17.3.1:
     resolution: {integrity: sha512-hs7+tS4rRm1QLHPfanLCqXIi632tP4V7Sai1ENUP2WTufU6am++tU9uSw9YrNCFqbABiEv0ndKU1XCUcfu2tXA==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0  || ^17.0.0
       react-dom: ^16.8.0  || ^17.0.0
 
   react-zoom-pan-pinch@3.4.4:
     resolution: {integrity: sha512-lGTu7D9lQpYEQ6sH+NSlLA7gicgKRW8j+D/4HO1AbSV2POvKRFzdWQ8eI0r3xmOsl4dYQcY+teV6MhULeg1xBw==}
     engines: {node: '>=8', npm: '>=5'}
     peerDependencies:
-      react: ^18.2.0
+      react: '*'
       react-dom: '*'
+
+  react@17.0.2:
+    resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
+    engines: {node: '>=0.10.0'}
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
@@ -8529,8 +8535,8 @@ packages:
   synchronous-promise@2.0.17:
     resolution: {integrity: sha512-AsS729u2RHUfEra9xJrE39peJcc2stq2+poBXX8bcM08Y6g9j/i/PUzwNQqkaJde7Ntg1TO7bSREbR5sdosQ+g==}
 
-  systeminformation@5.30.3:
-    resolution: {integrity: sha512-NgHJUpA+y7j4asLQa9jgBt+Eb2piyQIXQ+YjOyd2K0cHNwbNJ6I06F5afOqOiaCuV/wrEyGrb0olg4aFLlJD+A==}
+  systeminformation@5.30.5:
+    resolution: {integrity: sha512-DpWmpCckhwR3hG+6udb6/aQB7PpiqVnvSljrjbKxNSvTRsGsg7NVE3/vouoYf96xgwMxXFKcS4Ux+cnkFwYM7A==}
     engines: {node: '>=8.0.0'}
     os: [darwin, linux, win32, freebsd, openbsd, netbsd, sunos, android]
     hasBin: true
@@ -8568,8 +8574,8 @@ packages:
     resolution: {integrity: sha512-biM9brNqxSc04Ee71hzFbryD11nX7VPhQQY32AdDmjFvodsRFz/3ufeoTZ6uYkRFfGo188tENcASNs3vTdsM0w==}
     engines: {node: '>=10'}
 
-  terser@5.45.0:
-    resolution: {integrity: sha512-hQ9c+JZEnMug8eqzuU48sCeq95f00lLDAaJ5gWhRkFXsfy3+SUkZXiF/Z66ZO6EomSmgqXnkhVrWXKaQ8K41Ug==}
+  terser@5.46.0:
+    resolution: {integrity: sha512-jTwoImyr/QbOWFFso3YoU3ik0jBBDJ6JTOQiy/J2YxVJdZCc+5u7skhNwiOR3FQIygFqVUPHl7qbbxtjW2K3Qg==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -8732,10 +8738,10 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4'
 
-  ts-checker-rspack-plugin@1.2.3:
-    resolution: {integrity: sha512-Fq2+/sSILEJKWrqoj/H+ytnBbYrudPfRLxaULA/MuL+/3jswXuiR4MOfL30R9XzVUD2km0pSx6bj8yk95IEOaA==}
+  ts-checker-rspack-plugin@1.2.4:
+    resolution: {integrity: sha512-ZuTUlS0s79Qyo7qxxkEToBtEfZEYBbaMIqqaULvH4rQHyZ9040udHUuWbx00gHeC8WM3+BbryyaHQYEy7ByQYw==}
     peerDependencies:
-      '@rspack/core': ^1.0.0
+      '@rspack/core': ^1.0.0 || ^2.0.0-0
       typescript: '>=3.8.0'
     peerDependenciesMeta:
       '@rspack/core':
@@ -9005,7 +9011,7 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -9013,13 +9019,13 @@ packages:
   use-deep-compare@1.3.0:
     resolution: {integrity: sha512-94iG+dEdEP/Sl3WWde+w9StIunlV8Dgj+vkt5wTwMoFQLaijiEZSXXy8KtcStpmEDtIptRJiNeD4ACTtVvnIKA==}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.8.0'
 
   use-isomorphic-layout-effect@1.2.1:
     resolution: {integrity: sha512-tpZZ+EX0gaghDAiFR37hj5MgY6ZN55kLiPkJsKxBMZ6GZdOSPJXiOzPM984oPYZ5AnehYx5WQp1+ME8I/P/pRA==}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -9027,7 +9033,7 @@ packages:
   use-resize-observer@9.1.0:
     resolution: {integrity: sha512-R25VqO9Wb3asSD4eqtcxk8sJalvIOYBqS8MNZlpDSQ4l4xMQxC/J7Id9HoTqPq8FwULIn0PVW+OAqF2dyYbjow==}
     peerDependencies:
-      react: ^18.2.0
+      react: 16.8.0 - 18
       react-dom: 16.8.0 - 18
 
   use-sidecar@1.1.3:
@@ -9035,7 +9041,7 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       '@types/react': '*'
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -9043,13 +9049,13 @@ packages:
   use-sync-external-store@1.2.0:
     resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   use-typed-event-listener@4.0.2:
     resolution: {integrity: sha512-AhjRw+qg5t7OWg7en2Q4XDCdi2iyhALFl71tITL3FeZqt/jD1Qa6KnbH/UolARtID1Gd0IElizbCgolv3ZbUFA==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.14.0'
       typescript: '>=4.1.2'
     peerDependenciesMeta:
       typescript:
@@ -9099,7 +9105,7 @@ packages:
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=16.8'
-      react: ^18.2.0
+      react: '>=16.8'
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -9111,7 +9117,7 @@ packages:
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=16.8'
-      react: ^18.2.0
+      react: '>=16.8'
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -9523,7 +9529,7 @@ packages:
     resolution: {integrity: sha512-/WfLJuXiEJimt61KGMHebrFBwckkCHGhAgVXTgPQHl6IMzjqm6MREb1OnDSnCRiSmRdhgdFCctceg6tSm79hiw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
-      react: ^18.2.0
+      react: '>=16.8'
     peerDependenciesMeta:
       react:
         optional: true
@@ -11142,13 +11148,13 @@ snapshots:
       regenerator-runtime: 0.13.11
     optional: true
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.45.0))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.46.0))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.4.0(typescript@5.5.4)
-      vite: 4.5.14(@types/node@25.0.9)(terser@5.45.0)
+      vite: 4.5.14(@types/node@25.0.9)(terser@5.46.0)
     optionalDependencies:
       typescript: 5.5.4
 
@@ -11329,11 +11335,11 @@ snapshots:
   '@nxg-org/mineflayer-trajectories@1.2.0(encoding@0.1.13)':
     dependencies:
       '@nxg-org/mineflayer-util-plugin': 1.8.4
-      minecraft-data: 3.98.0
+      minecraft-data: 2.221.0
       mineflayer: https://codeload.github.com/zardoy/mineflayer/tar.gz/dd3b1ff38506d6f72d90e8444186e4e75fe82659(encoding@0.1.13)
       prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
       prismarine-item: 1.17.0
-      prismarine-physics: https://codeload.github.com/zardoy/prismarine-physics/tar.gz/353e25b800149393f40539ec381218be44cbb03b
+      prismarine-physics: 1.10.0
       vec3: 0.1.10
     transitivePeerDependencies:
       - encoding
@@ -11768,7 +11774,7 @@ snapshots:
     dependencies:
       serialize-javascript: 6.0.2
       smob: 1.5.0
-      terser: 5.45.0
+      terser: 5.46.0
     optionalDependencies:
       rollup: 2.79.2
 
@@ -11838,7 +11844,7 @@ snapshots:
       deepmerge: 4.3.1
       json5: 2.2.3
       reduce-configs: 1.1.1
-      ts-checker-rspack-plugin: 1.2.3(@rspack/core@1.3.3(@swc/helpers@0.5.18))(typescript@5.5.4)
+      ts-checker-rspack-plugin: 1.2.4(@rspack/core@1.3.3(@swc/helpers@0.5.18))(typescript@5.5.4)
     optionalDependencies:
       '@rsbuild/core': 1.3.5
     transitivePeerDependencies:
@@ -12085,7 +12091,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@storybook/builder-vite@7.6.21(encoding@0.1.13)(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.45.0))':
+  '@storybook/builder-vite@7.6.21(encoding@0.1.13)(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.46.0))':
     dependencies:
       '@storybook/channels': 7.6.21
       '@storybook/client-logger': 7.6.21
@@ -12103,7 +12109,7 @@ snapshots:
       fs-extra: 11.3.3
       magic-string: 0.30.21
       rollup: 3.29.5
-      vite: 4.5.14(@types/node@25.0.9)(terser@5.45.0)
+      vite: 4.5.14(@types/node@25.0.9)(terser@5.46.0)
     optionalDependencies:
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -12388,18 +12394,18 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/react-vite@7.6.21(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@2.79.2)(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.45.0))':
+  '@storybook/react-vite@7.6.21(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@2.79.2)(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.46.0))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.45.0))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.46.0))
       '@rollup/pluginutils': 5.3.0(rollup@2.79.2)
-      '@storybook/builder-vite': 7.6.21(encoding@0.1.13)(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.45.0))
+      '@storybook/builder-vite': 7.6.21(encoding@0.1.13)(typescript@5.5.4)(vite@4.5.14(@types/node@25.0.9)(terser@5.46.0))
       '@storybook/react': 7.6.21(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
-      '@vitejs/plugin-react': 3.1.0(vite@4.5.14(@types/node@25.0.9)(terser@5.45.0))
+      '@vitejs/plugin-react': 3.1.0(vite@4.5.14(@types/node@25.0.9)(terser@5.46.0))
       magic-string: 0.30.21
       react: 18.3.1
       react-docgen: 7.1.1
       react-dom: 18.3.1(react@18.3.1)
-      vite: 4.5.14(@types/node@25.0.9)(terser@5.45.0)
+      vite: 4.5.14(@types/node@25.0.9)(terser@5.46.0)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - encoding
@@ -12948,14 +12954,14 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-react@3.1.0(vite@4.5.14(@types/node@25.0.9)(terser@5.45.0))':
+  '@vitejs/plugin-react@3.1.0(vite@4.5.14(@types/node@25.0.9)(terser@5.46.0))':
     dependencies:
       '@babel/core': 7.28.6
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.6)
       '@babel/plugin-transform-react-jsx-source': 7.27.1(@babel/core@7.28.6)
       magic-string: 0.27.0
       react-refresh: 0.14.2
-      vite: 4.5.14(@types/node@25.0.9)(terser@5.45.0)
+      vite: 4.5.14(@types/node@25.0.9)(terser@5.46.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -13062,18 +13068,18 @@ snapshots:
       exit-hook: 2.2.1
       flatmap: 0.0.3
       long: 5.3.2
-      mc-bridge: 0.1.3(minecraft-data@3.98.0)
-      minecraft-data: 3.98.0
+      mc-bridge: 0.1.3(minecraft-data@3.102.3)
+      minecraft-data: 3.102.3
       minecraft-protocol: https://codeload.github.com/PrismarineJS/node-minecraft-protocol/tar.gz/bf89f7e86526c54d8c43f555d8f6dfa4948fd2d9(patch_hash=4ebdae314c68d01ce7879445c0b8bde5f90373abba8b66ed00d42e7a5f542f8b)(encoding@0.1.13)
       mkdirp: 2.1.6
       node-gzip: 1.1.2
       node-rsa: 1.1.1
       prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
-      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.98.0)
+      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.102.3)
       prismarine-entity: 2.5.0
       prismarine-item: 1.17.0
       prismarine-nbt: 2.8.0
-      prismarine-provider-anvil: https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.98.0)
+      prismarine-provider-anvil: https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.102.3)
       prismarine-windows: 2.9.0
       prismarine-world: https://codeload.github.com/zardoy/prismarine-world/tar.gz/ab2146c9933eef3247c3f64446de4ccc2c484c7c
       rambda: 9.4.2
@@ -13100,16 +13106,16 @@ snapshots:
       exit-hook: 2.2.1
       flatmap: 0.0.3
       long: 5.3.2
-      minecraft-data: 3.98.0
+      minecraft-data: 3.67.0
       minecraft-protocol: https://codeload.github.com/PrismarineJS/node-minecraft-protocol/tar.gz/bf89f7e86526c54d8c43f555d8f6dfa4948fd2d9(patch_hash=4ebdae314c68d01ce7879445c0b8bde5f90373abba8b66ed00d42e7a5f542f8b)(encoding@0.1.13)
       mkdirp: 2.1.6
       node-gzip: 1.1.2
       node-rsa: 1.1.1
-      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.98.0)
+      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.67.0)
       prismarine-entity: 2.5.0
       prismarine-item: 1.17.0
       prismarine-nbt: 2.8.0
-      prismarine-provider-anvil: https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.98.0)
+      prismarine-provider-anvil: https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.67.0)
       prismarine-windows: 2.9.0
       prismarine-world: https://codeload.github.com/zardoy/prismarine-world/tar.gz/ab2146c9933eef3247c3f64446de4ccc2c484c7c
       rambda: 9.4.2
@@ -13513,7 +13519,7 @@ snapshots:
       mixin-deep: 1.3.2
       pascalcase: 0.1.1
 
-  baseline-browser-mapping@2.9.14: {}
+  baseline-browser-mapping@2.9.15: {}
 
   basic-auth@2.0.1:
     dependencies:
@@ -13679,7 +13685,7 @@ snapshots:
 
   browserslist@4.28.1:
     dependencies:
-      baseline-browser-mapping: 2.9.14
+      baseline-browser-mapping: 2.9.15
       caniuse-lite: 1.0.30001764
       electron-to-chromium: 1.5.267
       node-releases: 2.0.27
@@ -14089,8 +14095,8 @@ snapshots:
       lodash-es: 4.17.22
       typed-emitter: 2.1.0
     optionalDependencies:
-      react: 18.3.1
-      use-typed-event-listener: 4.0.2(react@18.3.1)(typescript@5.5.4)
+      react: 17.0.2
+      use-typed-event-listener: 4.0.2(react@17.0.2)(typescript@5.5.4)
     transitivePeerDependencies:
       - typescript
 
@@ -14487,8 +14493,8 @@ snapshots:
 
   diamond-square@https://codeload.github.com/zardoy/diamond-square/tar.gz/cfaad2d1d5909fdfa63c8cc7bc05fb5e87782d71:
     dependencies:
-      minecraft-data: 3.98.0
-      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.98.0)
+      minecraft-data: 3.102.3
+      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.102.3)
       prismarine-registry: 1.11.0
       random-seed: 0.3.0
       vec3: 0.1.10
@@ -15523,7 +15529,7 @@ snapshots:
 
   flatted@3.3.3: {}
 
-  flow-parser@0.296.1: {}
+  flow-parser@0.297.0: {}
 
   follow-redirects@1.15.11(debug@4.4.3):
     optionalDependencies:
@@ -15746,7 +15752,7 @@ snapshots:
       bit-twiddle: 1.0.2
       glsl-tokenizer: 2.1.5
       nan: 2.24.0
-      node-abi: 3.85.0
+      node-abi: 3.86.0
       node-gyp: 9.4.1
       prebuild-install: 7.1.3
     transitivePeerDependencies:
@@ -16548,7 +16554,7 @@ snapshots:
       '@babel/register': 7.28.6(@babel/core@7.28.6)
       babel-core: 7.0.0-bridge.0(@babel/core@7.28.6)
       chalk: 4.1.2
-      flow-parser: 0.296.1
+      flow-parser: 0.297.0
       graceful-fs: 4.2.11
       micromatch: 4.0.8
       neo-async: 2.6.2
@@ -16918,9 +16924,9 @@ snapshots:
       maxrects-packer: '@zardoy/maxrects-packer@2.7.4'
       zod: 3.25.76
 
-  mc-bridge@0.1.3(minecraft-data@3.98.0):
+  mc-bridge@0.1.3(minecraft-data@3.102.3):
     dependencies:
-      minecraft-data: 3.98.0
+      minecraft-data: 3.102.3
 
   mcraft-fun-mineflayer@0.1.23(encoding@0.1.13)(mineflayer@https://codeload.github.com/zardoy/mineflayer/tar.gz/dd3b1ff38506d6f72d90e8444186e4e75fe82659(encoding@0.1.13)):
     dependencies:
@@ -17000,7 +17006,7 @@ snapshots:
 
   media-typer@0.3.0: {}
 
-  memfs@4.52.0:
+  memfs@4.53.0:
     dependencies:
       '@jsonjoy.com/json-pack': 1.21.0(tslib@2.8.1)
       '@jsonjoy.com/util': 1.9.0(tslib@2.8.1)
@@ -17236,7 +17242,11 @@ snapshots:
 
   min-indent@1.0.1: {}
 
-  minecraft-data@3.98.0: {}
+  minecraft-data@2.221.0: {}
+
+  minecraft-data@3.102.3: {}
+
+  minecraft-data@3.67.0: {}
 
   minecraft-folder-path@1.2.0: {}
 
@@ -17256,7 +17266,7 @@ snapshots:
       debug: 4.4.3(supports-color@8.1.1)
       endian-toggle: 0.0.0
       lodash.merge: 4.6.2
-      minecraft-data: 3.98.0
+      minecraft-data: 3.102.3
       minecraft-folder-path: 1.2.0
       node-fetch: 2.7.0(encoding@0.1.13)
       node-rsa: 0.4.2
@@ -17317,16 +17327,16 @@ snapshots:
   mineflayer@https://codeload.github.com/zardoy/mineflayer/tar.gz/dd3b1ff38506d6f72d90e8444186e4e75fe82659(encoding@0.1.13):
     dependencies:
       '@nxg-org/mineflayer-physics-util': 1.8.10
-      minecraft-data: 3.98.0
+      minecraft-data: 3.102.3
       minecraft-protocol: https://codeload.github.com/PrismarineJS/node-minecraft-protocol/tar.gz/bf89f7e86526c54d8c43f555d8f6dfa4948fd2d9(patch_hash=4ebdae314c68d01ce7879445c0b8bde5f90373abba8b66ed00d42e7a5f542f8b)(encoding@0.1.13)
-      prismarine-biome: 1.3.0(minecraft-data@3.98.0)(prismarine-registry@1.11.0)
+      prismarine-biome: 1.3.0(minecraft-data@3.102.3)(prismarine-registry@1.11.0)
       prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
       prismarine-chat: 1.12.0
-      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.98.0)
+      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.102.3)
       prismarine-entity: 2.5.0
       prismarine-item: 1.17.0
       prismarine-nbt: 2.8.0
-      prismarine-physics: https://codeload.github.com/zardoy/prismarine-physics/tar.gz/353e25b800149393f40539ec381218be44cbb03b
+      prismarine-physics: 1.10.0
       prismarine-recipe: 1.3.1(prismarine-registry@1.11.0)
       prismarine-registry: 1.11.0
       prismarine-windows: 2.9.0
@@ -17544,7 +17554,7 @@ snapshots:
       lower-case: 2.0.2
       tslib: 2.8.1
 
-  node-abi@3.85.0:
+  node-abi@3.86.0:
     dependencies:
       semver: 7.7.3
 
@@ -18083,7 +18093,7 @@ snapshots:
       minimist: 1.2.8
       mkdirp-classic: 0.5.3
       napi-build-utils: 2.0.0
-      node-abi: 3.85.0
+      node-abi: 3.86.0
       pump: 3.0.3
       rc: 1.2.8
       simple-get: 4.0.1
@@ -18119,15 +18129,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  prismarine-biome@1.3.0(minecraft-data@3.98.0)(prismarine-registry@1.11.0):
+  prismarine-biome@1.3.0(minecraft-data@3.102.3)(prismarine-registry@1.11.0):
     dependencies:
-      minecraft-data: 3.98.0
+      minecraft-data: 3.102.3
+      prismarine-registry: 1.11.0
+
+  prismarine-biome@1.3.0(minecraft-data@3.67.0)(prismarine-registry@1.11.0):
+    dependencies:
+      minecraft-data: 3.67.0
       prismarine-registry: 1.11.0
 
   prismarine-block@https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9:
     dependencies:
-      minecraft-data: 3.98.0
-      prismarine-biome: 1.3.0(minecraft-data@3.98.0)(prismarine-registry@1.11.0)
+      minecraft-data: 3.102.3
+      prismarine-biome: 1.3.0(minecraft-data@3.102.3)(prismarine-registry@1.11.0)
       prismarine-chat: 1.12.0
       prismarine-item: 1.17.0
       prismarine-nbt: 2.8.0
@@ -18139,9 +18154,22 @@ snapshots:
       prismarine-nbt: 2.8.0
       prismarine-registry: 1.11.0
 
-  prismarine-chunk@https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.98.0):
+  prismarine-chunk@https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.102.3):
     dependencies:
-      prismarine-biome: 1.3.0(minecraft-data@3.98.0)(prismarine-registry@1.11.0)
+      prismarine-biome: 1.3.0(minecraft-data@3.102.3)(prismarine-registry@1.11.0)
+      prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
+      prismarine-nbt: 2.8.0
+      prismarine-registry: 1.11.0
+      smart-buffer: 4.2.0
+      uint4: 0.1.2
+      vec3: 0.1.10
+      xxhash-wasm: 0.4.2
+    transitivePeerDependencies:
+      - minecraft-data
+
+  prismarine-chunk@https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.67.0):
+    dependencies:
+      prismarine-biome: 1.3.0(minecraft-data@3.67.0)(prismarine-registry@1.11.0)
       prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
       prismarine-nbt: 2.8.0
       prismarine-registry: 1.11.0
@@ -18168,16 +18196,27 @@ snapshots:
     dependencies:
       protodef: 1.19.0
 
-  prismarine-physics@https://codeload.github.com/zardoy/prismarine-physics/tar.gz/353e25b800149393f40539ec381218be44cbb03b:
+  prismarine-physics@1.10.0:
     dependencies:
-      minecraft-data: 3.98.0
+      minecraft-data: 3.102.3
       prismarine-nbt: 2.8.0
       vec3: 0.1.10
 
-  prismarine-provider-anvil@https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.98.0):
+  prismarine-provider-anvil@https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.102.3):
     dependencies:
       prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
-      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.98.0)
+      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.102.3)
+      prismarine-nbt: 2.8.0
+      prismarine-world: https://codeload.github.com/zardoy/prismarine-world/tar.gz/ab2146c9933eef3247c3f64446de4ccc2c484c7c
+      uint4: 0.1.2
+      vec3: 0.1.10
+    transitivePeerDependencies:
+      - minecraft-data
+
+  prismarine-provider-anvil@https://codeload.github.com/zardoy/prismarine-provider-anvil/tar.gz/1d548fac63fe977c8281f0a9a522b37e4d92d0b7(minecraft-data@3.67.0):
+    dependencies:
+      prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
+      prismarine-chunk: https://codeload.github.com/zardoy/prismarine-chunk/tar.gz/ec44d01fbe2e3a310c605761688a85119f056332(minecraft-data@3.67.0)
       prismarine-nbt: 2.8.0
       prismarine-world: https://codeload.github.com/zardoy/prismarine-world/tar.gz/ab2146c9933eef3247c3f64446de4ccc2c484c7c
       uint4: 0.1.2
@@ -18199,13 +18238,13 @@ snapshots:
 
   prismarine-registry@1.11.0:
     dependencies:
-      minecraft-data: 3.98.0
+      minecraft-data: 3.102.3
       prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
       prismarine-nbt: 2.8.0
 
   prismarine-schematic@1.2.3:
     dependencies:
-      minecraft-data: 3.98.0
+      minecraft-data: 3.102.3
       prismarine-block: https://codeload.github.com/zardoy/prismarine-block/tar.gz/853c559bff2b402863ee9a75b125a3ca320838f9
       prismarine-nbt: 2.8.0
       prismarine-world: https://codeload.github.com/zardoy/prismarine-world/tar.gz/ab2146c9933eef3247c3f64446de4ccc2c484c7c
@@ -18644,6 +18683,12 @@ snapshots:
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  react@17.0.2:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+    optional: true
 
   react@18.3.1:
     dependencies:
@@ -19649,7 +19694,7 @@ snapshots:
 
   synchronous-promise@2.0.17: {}
 
-  systeminformation@5.30.3:
+  systeminformation@5.30.5:
     optional: true
 
   tabbable@6.4.0: {}
@@ -19703,7 +19748,7 @@ snapshots:
       type-fest: 0.16.0
       unique-string: 2.0.0
 
-  terser@5.45.0:
+  terser@5.46.0:
     dependencies:
       '@jridgewell/source-map': 0.3.11
       acorn: 8.15.0
@@ -19865,13 +19910,13 @@ snapshots:
     dependencies:
       typescript: 5.5.4
 
-  ts-checker-rspack-plugin@1.2.3(@rspack/core@1.3.3(@swc/helpers@0.5.18))(typescript@5.5.4):
+  ts-checker-rspack-plugin@1.2.4(@rspack/core@1.3.3(@swc/helpers@0.5.18))(typescript@5.5.4):
     dependencies:
       '@babel/code-frame': 7.28.6
       '@rspack/lite-tapable': 1.1.0
       chokidar: 3.6.0
       is-glob: 4.0.3
-      memfs: 4.52.0
+      memfs: 4.53.0
       minimatch: 9.0.5
       picocolors: 1.1.1
       typescript: 5.5.4
@@ -20153,6 +20198,12 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.27
 
+  use-deep-compare@1.3.0(react@17.0.2):
+    dependencies:
+      dequal: 2.0.3
+      react: 17.0.2
+    optional: true
+
   use-deep-compare@1.3.0(react@18.3.1):
     dependencies:
       dequal: 2.0.3
@@ -20181,6 +20232,15 @@ snapshots:
   use-sync-external-store@1.2.0(react@18.3.1):
     dependencies:
       react: 18.3.1
+
+  use-typed-event-listener@4.0.2(react@17.0.2)(typescript@5.5.4):
+    dependencies:
+      '@babel/runtime': 7.28.6
+      react: 17.0.2
+      use-deep-compare: 1.3.0(react@17.0.2)
+    optionalDependencies:
+      typescript: 5.5.4
+    optional: true
 
   use-typed-event-listener@4.0.2(react@18.3.1)(typescript@5.5.4):
     dependencies:
@@ -20264,14 +20324,14 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-node@0.34.6(@types/node@25.0.9)(terser@5.45.0):
+  vite-node@0.34.6(@types/node@25.0.9)(terser@5.46.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.3(supports-color@8.1.1)
       mlly: 1.8.0
       pathe: 1.1.2
       picocolors: 1.1.1
-      vite: 4.5.14(@types/node@25.0.9)(terser@5.45.0)
+      vite: 4.5.14(@types/node@25.0.9)(terser@5.46.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -20282,7 +20342,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite@4.5.14(@types/node@25.0.9)(terser@5.45.0):
+  vite@4.5.14(@types/node@25.0.9)(terser@5.46.0):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.5.6
@@ -20290,9 +20350,9 @@ snapshots:
     optionalDependencies:
       '@types/node': 25.0.9
       fsevents: 2.3.3
-      terser: 5.45.0
+      terser: 5.46.0
 
-  vitest@0.34.6(terser@5.45.0):
+  vitest@0.34.6(terser@5.46.0):
     dependencies:
       '@types/chai': 4.3.20
       '@types/chai-subset': 1.3.6(@types/chai@4.3.20)
@@ -20315,8 +20375,8 @@ snapshots:
       strip-literal: 1.3.0
       tinybench: 2.9.0
       tinypool: 0.7.0
-      vite: 4.5.14(@types/node@25.0.9)(terser@5.45.0)
-      vite-node: 0.34.6(@types/node@25.0.9)(terser@5.45.0)
+      vite: 4.5.14(@types/node@25.0.9)(terser@5.46.0)
+      vite-node: 0.34.6(@types/node@25.0.9)(terser@5.46.0)
       why-is-node-running: 2.3.0
     transitivePeerDependencies:
       - less

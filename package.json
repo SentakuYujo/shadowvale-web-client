@@ -36,11 +36,7 @@
     "update-git-deps": "tsx scripts/updateGitDeps.ts",
     "request-data": "tsx scripts/requestData.ts"
   },
-  "keywords": [
-    "prismarine",
-    "web",
-    "client"
-  ],
+  "keywords": ["prismarine", "web", "client"],
   "release": {
     "attachReleaseFiles": "{self-host.zip,minecraft.html}"
   },
@@ -86,8 +82,8 @@
     "jszip": "^3.10.1",
     "lodash-es": "^4.17.21",
     "mcraft-fun-mineflayer": "^0.1.23",
-    "minecraft-data": "3.98.0",
-    "minecraft-protocol": "github:PrismarineJS/node-minecraft-protocol#master",
+    "minecraft-data": "3.102.3",
+    "minecraft-protocol": "^1.62.0",
     "mineflayer-item-map-downloader": "github:zardoy/mineflayer-item-map-downloader",
     "mojangson": "^2.0.4",
     "net-browserify": "github:zardoy/prismarinejs-net-browserify",
@@ -156,7 +152,7 @@
     "https-browserify": "^1.0.0",
     "mc-assets": "^0.2.62",
     "minecraft-inventory-gui": "github:zardoy/minecraft-inventory-gui#next",
-    "mineflayer": "github:zardoy/mineflayer#gen-the-master",
+    "mineflayer": "^4.33.0",
     "mineflayer-mouse": "^0.1.21",
     "npm-run-all": "^4.1.5",
     "os-browserify": "^0.3.0",
@@ -189,11 +185,7 @@
       "not op_mini all",
       "> 0.5%"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "pnpm": {
     "overrides": {
@@ -205,36 +197,21 @@
       "diamond-square": "github:zardoy/diamond-square",
       "prismarine-block": "github:zardoy/prismarine-block#next-era",
       "prismarine-world": "github:zardoy/prismarine-world#next-era",
-      "minecraft-data": "3.98.0",
       "prismarine-provider-anvil": "github:zardoy/prismarine-provider-anvil#everything",
-      "prismarine-physics": "github:zardoy/prismarine-physics",
       "minecraft-protocol": "github:PrismarineJS/node-minecraft-protocol#master",
-      "react": "^18.2.0",
       "prismarine-chunk": "github:zardoy/prismarine-chunk#master",
       "prismarine-item": "latest"
     },
     "updateConfig": {
-      "ignoreDependencies": [
-        "browserfs",
-        "google-drive-browserfs"
-      ]
+      "ignoreDependencies": ["browserfs", "google-drive-browserfs"]
     },
     "patchedDependencies": {
       "pixelarticons@1.8.1": "patches/pixelarticons@1.8.1.patch",
       "mineflayer-item-map-downloader@1.2.0": "patches/mineflayer-item-map-downloader@1.2.0.patch",
       "minecraft-protocol": "patches/minecraft-protocol.patch"
     },
-    "ignoredBuiltDependencies": [
-      "canvas",
-      "core-js",
-      "gl"
-    ],
-    "onlyBuiltDependencies": [
-      "sharp",
-      "cypress",
-      "esbuild",
-      "fsevents"
-    ],
+    "ignoredBuiltDependencies": ["canvas", "core-js", "gl"],
+    "onlyBuiltDependencies": ["sharp", "cypress", "esbuild", "fsevents"],
     "ignorePatchFailures": false,
     "allowUnusedPatches": false
   },
